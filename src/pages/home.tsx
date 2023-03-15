@@ -1,3 +1,14 @@
+import { HomeProducts } from "../components/content/home/homeProducts";
+import { HomeJumbotron } from "../components/content/home/homeJumbotron";
+import { Container } from "../components/layouts/container/container";
+
 export const Home = () => {
-  return <div className="h-screen p-10 bg-green-700"></div>;
+  return (
+    <Container>
+      <div className="space-y-4">
+        <HomeJumbotron />
+        <HomeProducts />
+      </div>
+    </Container>
+  );
 };

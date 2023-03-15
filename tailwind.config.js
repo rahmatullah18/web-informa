@@ -7,17 +7,20 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          100: "#49714F",
-          200: "#F4F4F6",
+          100: "#F8C166",
+          200: "#FFFFFF",
         },
         secondary: {
-          100: '#010101',
-          200: '#E4DEA1'
+          100: '#CEE6FF',
+          200: '#3583DD'
         },
         tertiary: {
-          100: "#FFFFFF",
-          200: '#B7BCC1'
+          100: "#000000",
+          200: '#ECEEFD'
         }
+      },
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif']
       }
     },
   },
