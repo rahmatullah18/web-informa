@@ -11,6 +11,7 @@ type TypeDataProducts = {
   product_price: number;
   product_color?: string;
   product_size?: string[];
+  slug: string;
 };
 
 export const dataProducts: TypeDataProducts[] = [
@@ -19,39 +20,44 @@ export const dataProducts: TypeDataProducts[] = [
     product_name: "Nike air 1",
     urlImage: RedShoes,
     product_price: 100000,
-    product_color: "#C3CAFF",
+    product_color: "bg-[#F8C166]",
     product_size: ["40", "41", "42"],
+    slug: "nike-air-1",
   },
   {
     id: 2,
     product_name: "Nike air 2",
     urlImage: OrangeShoes,
     product_price: 200000,
-    product_color: "#4FE078",
+    product_color: "bg-[#F8C166]",
     product_size: ["40", "41", "42"],
+    slug: "nike-air-2",
   },
   {
     id: 3,
     product_name: "Nike air 3",
     urlImage: BlueShoes,
     product_price: 300000,
-    product_color: "#B43EC7",
+    product_color: "bg-[#3583DD]",
     product_size: ["40", "41", "42"],
+    slug: "nike-air-3",
   },
   {
     id: 4,
     product_name: "Nike air 4",
     urlImage: WhiteShoes,
     product_price: 400000,
-    product_color: "#4FE078",
+    product_color: "bg-[#3583DD]",
     product_size: ["40", "41", "42"],
+    slug: "nike-air-4",
   },
   {
     id: 5,
     product_name: "Nike air 5",
     urlImage: BlackShoes,
     product_price: 500000,
-    product_color: "#3583DD",
+    product_color: "bg-[#000]",
     product_size: ["40", "41", "42"],
+    slug: "nike-air-5",
   },
 ];

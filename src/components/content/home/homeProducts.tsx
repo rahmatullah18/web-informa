@@ -1,6 +1,7 @@
 import { Heading } from "../../ui/heading/heading";
 import { HomeCard } from "./homeCard";
 import { dataProducts } from "../../../data/dataProducts";
+import { Link } from "react-router-dom";
 
 export const HomeProducts = () => {
   return (
@@ -14,10 +15,13 @@ export const HomeProducts = () => {
       <div className="grid w-full grid-cols-2 gap-4 place-items-center">
         {dataProducts.map((product) => {
           return (
-            <HomeCard
-              urlImge={product.urlImage}
-              color={product.product_color}
-            />
+            <Link to={`products/${product.slug}`}>
+              <HomeCard
+                urlImge={product.urlImage}
+                color={product.product_color}
+                name={product.product_name}
+              />
+            </Link>
           );
         })}
       </div>
