@@ -3,18 +3,9 @@ import OrangeShoes from "../components/assets/orangeNike.svg";
 import BlueShoes from "../components/assets/blueNike.svg";
 import WhiteShoes from "../components/assets/whiteNike.svg";
 import BlackShoes from "../components/assets/blackNike.svg";
+import { TypeDataProduct } from "./typeDataProduct";
 
-type TypeDataProducts = {
-  id: number;
-  product_name: string;
-  urlImage: string;
-  product_price: number;
-  product_color?: string;
-  product_size?: string[];
-  slug: string;
-};
-
-export const dataProducts: TypeDataProducts[] = [
+export const dataProducts: TypeDataProduct[] = [
   {
     id: 1,
     product_name: "Nike air 1",
@@ -23,6 +14,10 @@ export const dataProducts: TypeDataProducts[] = [
     product_color: "bg-[#F8C166]",
     product_size: ["40", "41", "42"],
     slug: "nike-air-1",
+    sizes: ["40", "41", "42"],
+    colors: ["bg-[#ffffff]", "bg-[#fff000]"],
+    amount: 20,
+    stock: 100,
   },
   {
     id: 2,
@@ -32,6 +27,10 @@ export const dataProducts: TypeDataProducts[] = [
     product_color: "bg-[#F8C166]",
     product_size: ["40", "41", "42"],
     slug: "nike-air-2",
+    sizes: ["40", "41", "42"],
+    colors: ["bg-[#ffffff]", "bg-[#fff000]"],
+    amount: 20,
+    stock: 100,
   },
   {
     id: 3,
@@ -41,6 +40,10 @@ export const dataProducts: TypeDataProducts[] = [
     product_color: "bg-[#3583DD]",
     product_size: ["40", "41", "42"],
     slug: "nike-air-3",
+    sizes: ["40", "41", "42"],
+    colors: ["bg-[#ffffff]", "bg-[#fff000]"],
+    amount: 20,
+    stock: 100,
   },
   {
     id: 4,
@@ -50,6 +53,10 @@ export const dataProducts: TypeDataProducts[] = [
     product_color: "bg-[#3583DD]",
     product_size: ["40", "41", "42"],
     slug: "nike-air-4",
+    sizes: ["40", "41", "42"],
+    colors: ["bg-[#ffffff]", "bg-[#fff000]"],
+    amount: 20,
+    stock: 100,
   },
   {
     id: 5,
@@ -59,5 +66,9 @@ export const dataProducts: TypeDataProducts[] = [
     product_color: "bg-[#000]",
     product_size: ["40", "41", "42"],
     slug: "nike-air-5",
+    sizes: ["40", "41", "42"],
+    colors: ["bg-[#ffffff]", "bg-[#fff000]"],
+    amount: 20,
+    stock: 100,
   },
 ];

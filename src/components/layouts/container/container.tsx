@@ -9,7 +9,7 @@ type TypeContainerProps = {
 
 export const Container = ({ children }: TypeContainerProps) => {
   return (
-    <div className="h-fit">
+    <div className="h-screen">
       <Navbar />
       <div className="h-full md:grid md:grid-cols-6">
         <Sidebar />

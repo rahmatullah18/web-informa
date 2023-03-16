@@ -4,5 +4,5 @@ type TypeContentProps = {
 };
 
 export const Content = ({ children }: TypeContentProps) => {
-  return <div className="h-full md:col-span-5 bg-primary-200">{children}</div>;
+  return <div className="h-full md:col-span-5 ">{children}</div>;
 };

@@ -15,7 +15,7 @@ export const HomeProducts = () => {
       <div className="grid w-full grid-cols-2 gap-4 place-items-center">
         {dataProducts.map((product) => {
           return (
-            <Link to={`products/${product.slug}`}>
+            <Link key={product.id} to={`products/${product.slug}`}>
               <HomeCard
                 urlImge={product.urlImage}
                 color={product.product_color}
