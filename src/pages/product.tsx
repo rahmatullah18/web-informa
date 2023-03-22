@@ -13,6 +13,7 @@ export const Product = () => {
   const [product, setProduct] = useState<TypeDataProduct>();
   const [urlImage, setUrlImage] = useState("");
   const [size, setSize] = useState<string>("");
+
   const [amount, setAmount] = useState<number>(1);
 
   const { slug } = useParams();

@@ -1,6 +1,6 @@
 import { Box } from "../../ui/box/box";
 import { Heading } from "../../ui/heading/heading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type TypeColorProps = {
   colors?: { id: number; url: string; color: string }[];
@@ -11,13 +11,25 @@ export const ProductColorPicker = ({
   colors,
   filterUrlImage,
 }: TypeColorProps) => {
-  const [selected, setSelected] = useState<string>("");
-  const mapDataColors = colors?.map((color, idx) => {
+  const [selected, setSelected] = useState<number>();
+  const handleSelected = (id: number) => {
+    setSelected(id);
+    filterUrlImage(id);
+  };
+  useEffect(() => {
+    const findFirstId = colors?.find((item) => item.id);
+    setSelected(findFirstId?.id);
+  }, [colors]);
+  const mapDataColors = colors?.map((color) => {
     return (
       <button
         key={color.id}
-        className={`w-10 shadow-md h-10 rounded-md border ${color.color}`}
-        onClick={() => filterUrlImage(color.id)}
+        className={`w-10  h-10 rounded-md  ${
+          selected === color.id
+            ? "border-2 border-tertiary-100 shadow-xl"
+            : "border shadow-md"
+        } ${color.color}`}
+        onClick={() => handleSelected(color.id)}
       ></button>
     );
   });
