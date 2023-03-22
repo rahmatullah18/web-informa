@@ -41,16 +41,16 @@ export const Product = () => {
 
   return (
     <Container>
-      <div className="flex flex-col p-2 space-y-10 ">
+      <div className="flex flex-col p-2 space-y-5 ">
         {/* product preview */}
         <ProductPreview
           urlImage={urlImage === "" ? product?.urlImage[0].url : urlImage}
           color={product?.product_color}
         />
-        <div className="space-y-10">
+        <div className="px-2 py-5 space-y-5 rounded-md shadow-md bg-secondary-100">
           {/* heading */}
           <span className="text-center">
-            <h1 className="text-3xl font-bold capitalize">
+            <h1 className="text-4xl font-bold capitalize">
               {product?.product_name}
             </h1>
           </span>

@@ -1,3 +1,4 @@
+import { Box } from "../../ui/box/box";
 import { Heading } from "../../ui/heading/heading";
 
 type TypeProductSize = {
@@ -18,9 +19,9 @@ export const ProductSize = ({ sizes, filterSize }: TypeProductSize) => {
     );
   });
   return (
-    <div className="flex items-center justify-between">
+    <Box>
       <Heading size="lg">Size :</Heading>
       <div className="flex items-center space-x-2">{mapDataSizes}</div>
-    </div>
+    </Box>
   );
 };

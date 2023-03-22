@@ -22,7 +22,7 @@ export const Navbar = () => {
         onClick={() => cartCtx.handleShowCart(true)}
         className="relative flex flex-col items-center justify-center p-1 rounded-xl"
       >
-        <HiShoppingCart className="w-10 h-10 text-tertiary-100" />
+        <HiShoppingCart className="w-8 h-8 text-tertiary-100" />
         <span className="absolute top-0 right-0 flex flex-col items-center justify-center w-5 h-5 font-bold rounded-full shadow-md bg-primary-200">
           {cartTotal}
         </span>

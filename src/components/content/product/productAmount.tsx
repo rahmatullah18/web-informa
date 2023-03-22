@@ -1,3 +1,4 @@
+import { Box } from "../../ui/box/box";
 import { Heading } from "../../ui/heading/heading";
 import { Input } from "../../ui/input/input";
 
@@ -8,7 +9,7 @@ type TypeProductAmount = {
 
 export const ProductAmount = ({ amount, setAmount }: TypeProductAmount) => {
   return (
-    <div className="flex items-center justify-between ">
+    <Box>
       <Heading size="lg">Amount : </Heading>
       <Input
         className="w-24"
@@ -17,6 +18,6 @@ export const ProductAmount = ({ amount, setAmount }: TypeProductAmount) => {
         value={amount}
         handleOnChange={(e) => setAmount(parseInt(e.target.value))}
       />
-    </div>
+    </Box>
   );
 };
