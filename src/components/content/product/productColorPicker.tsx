@@ -1,16 +1,21 @@
 import { Heading } from "../../ui/heading/heading";
 
 type TypeColorProps = {
-  colors?: string[];
+  colors?: { id: number; url: string; color: string }[];
+  filterUrlImage: (id: number) => void;
 };
 
-export const ProductColorPicker = ({ colors }: TypeColorProps) => {
+export const ProductColorPicker = ({
+  colors,
+  filterUrlImage,
+}: TypeColorProps) => {
   const mapDataColors = colors?.map((color, idx) => {
     return (
-      <div
-        key={idx}
-        className={`w-10 shadow-md h-10 rounded-md ${color}`}
-      ></div>
+      <button
+        key={color.id}
+        className={`w-10 shadow-md h-10 rounded-md ${color.color}`}
+        onClick={() => filterUrlImage(color.id)}
+      ></button>
     );
   });
   return (

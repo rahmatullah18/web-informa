@@ -2,17 +2,19 @@ import { Heading } from "../../ui/heading/heading";
 
 type TypeProductSize = {
   sizes?: string[];
+  filterSize: (number: string) => void;
 };
 
-export const ProductSize = ({ sizes }: TypeProductSize) => {
+export const ProductSize = ({ sizes, filterSize }: TypeProductSize) => {
   const mapDataSizes = sizes?.map((size, idx) => {
     return (
-      <div
+      <button
+        onClick={() => filterSize(size)}
         key={idx}
         className="flex items-center justify-center w-10 h-10 border-2 rounded-md shadow-md border-secondary-200"
       >
         <Heading size="md">{size}</Heading>
-      </div>
+      </button>
     );
   });
   return (

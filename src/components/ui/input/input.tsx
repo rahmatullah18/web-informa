@@ -2,7 +2,7 @@ type TypeInputText = {
   type?: string;
   className?: string;
   placeholder: string;
-  value?: string;
+  value?: number;
   handleOnChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -20,6 +20,7 @@ export const Input = ({
       placeholder={placeholder}
       value={value}
       onChange={handleOnChange}
+      min={"1"}
     />
   );
 };

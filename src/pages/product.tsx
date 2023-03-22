@@ -11,7 +11,20 @@ import { TypeDataProduct } from "../data/typeDataProduct";
 
 export const Product = () => {
   const [product, setProduct] = useState<TypeDataProduct>();
+  const [urlImage, setUrlImage] = useState("");
+  const [size, setSize] = useState<string>("");
+  const [amount, setAmount] = useState<number>(1);
+
   const { slug } = useParams();
+
+  const filterUrlImage = (id: number) => {
+    const url = product?.urlImage.find((item) => item.id === id)?.url;
+    setUrlImage(`${url}`);
+  };
+
+  const filterSize = (number: string) => {
+    setSize(number);
+  };
 
   const filterProduct = useCallback(() => {
     try {
@@ -31,7 +44,7 @@ export const Product = () => {
       <div className="flex flex-col p-2 space-y-10 ">
         {/* product preview */}
         <ProductPreview
-          urlImage={product?.urlImage}
+          urlImage={urlImage === "" ? product?.urlImage[0].url : urlImage}
           color={product?.product_color}
         />
         <div className="space-y-10">
@@ -42,11 +55,14 @@ export const Product = () => {
             </h1>
           </span>
           {/* color */}
-          <ProductColorPicker colors={product?.colors} />
+          <ProductColorPicker
+            colors={product?.urlImage}
+            filterUrlImage={filterUrlImage}
+          />
           {/* size */}
-          <ProductSize sizes={product?.sizes} />
+          <ProductSize filterSize={filterSize} sizes={product?.sizes} />
           {/* amount */}
-          <ProductAmount amount={product?.amount} />
+          <ProductAmount amount={amount} setAmount={setAmount} />
           {/* buttonSubmit */}
           <span className="flex justify-end">
             <Button size="lg">Pesan</Button>

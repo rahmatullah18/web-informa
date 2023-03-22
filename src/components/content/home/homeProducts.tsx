@@ -9,7 +9,7 @@ export const HomeProducts = () => {
     return (
       <Link key={product.id} to={`products/${product.slug}`}>
         <HomeCard
-          urlImge={product.urlImage}
+          urlImge={product.urlImage[0].url}
           color={product.product_color}
           name={product.product_name}
         />

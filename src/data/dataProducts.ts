@@ -9,7 +9,10 @@ export const dataProducts: TypeDataProduct[] = [
   {
     id: 1,
     product_name: "Nike air 1",
-    urlImage: RedShoes,
+    urlImage: [
+      { id: 1, url: RedShoes, color: "bg-[#ffffff]" },
+      { id: 2, url: OrangeShoes, color: "bg-[#fff000]" },
+    ],
     product_price: 100000,
     product_color: "bg-[#F8C166]",
     product_size: ["40", "41", "42"],
@@ -22,7 +25,10 @@ export const dataProducts: TypeDataProduct[] = [
   {
     id: 2,
     product_name: "Nike air 2",
-    urlImage: OrangeShoes,
+    urlImage: [
+      { id: 1, url: OrangeShoes, color: "bg-[#ffffff]" },
+      { id: 2, url: RedShoes, color: "bg-[#fff000]" },
+    ],
     product_price: 200000,
     product_color: "bg-[#F8C166]",
     product_size: ["40", "41", "42"],
@@ -35,7 +41,10 @@ export const dataProducts: TypeDataProduct[] = [
   {
     id: 3,
     product_name: "Nike air 3",
-    urlImage: BlueShoes,
+    urlImage: [
+      { id: 1, url: BlueShoes, color: "bg-[#ffffff]" },
+      { id: 2, url: OrangeShoes, color: "bg-[#fff000]" },
+    ],
     product_price: 300000,
     product_color: "bg-[#3583DD]",
     product_size: ["40", "41", "42"],
@@ -48,7 +57,10 @@ export const dataProducts: TypeDataProduct[] = [
   {
     id: 4,
     product_name: "Nike air 4",
-    urlImage: WhiteShoes,
+    urlImage: [
+      { id: 1, url: WhiteShoes, color: "bg-[#ffffff]" },
+      { id: 2, url: OrangeShoes, color: "bg-[#fff000]" },
+    ],
     product_price: 400000,
     product_color: "bg-[#3583DD]",
     product_size: ["40", "41", "42"],
@@ -61,7 +73,10 @@ export const dataProducts: TypeDataProduct[] = [
   {
     id: 5,
     product_name: "Nike air 5",
-    urlImage: BlackShoes,
+    urlImage: [
+      { id: 1, url: BlackShoes, color: "bg-[#ffffff]" },
+      { id: 2, url: OrangeShoes, color: "bg-[#fff000]" },
+    ],
     product_price: 500000,
     product_color: "bg-[#000]",
     product_size: ["40", "41", "42"],
