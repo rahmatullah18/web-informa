@@ -1,5 +1,5 @@
 import { Box } from "../../ui/box/box";
-import { Heading } from "../../ui/heading/heading";
+
 import { useEffect, useState } from "react";
 
 type TypeProductSize = {
@@ -18,10 +18,10 @@ export const ProductSize = ({ sizes, filterSize }: TypeProductSize) => {
         className={`flex items-center justify-center w-10 h-10 border-2 rounded-md  ${
           selected === size
             ? "border-tertiary-100 shadow-xl"
-            : "border-secondary-200 shadow-md "
+            : "border-secondary-200 shadow-md text-secondary-200"
         }`}
       >
-        <Heading size="md">{size}</Heading>
+        <h1>{size}</h1>
       </button>
     );
   });
@@ -36,8 +36,7 @@ export const ProductSize = ({ sizes, filterSize }: TypeProductSize) => {
     setSelected(findFirstSize);
   }, [sizes]);
   return (
-    <Box>
-      <Heading size="lg">Size :</Heading>
+    <Box label="Pilih Ukuran">
       <div className={`flex items-center space-x-2`}>{mapDataSizes}</div>
     </Box>
   );
