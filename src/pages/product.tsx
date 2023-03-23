@@ -12,9 +12,12 @@ import { TypeDataProduct } from "../data/typeDataProduct";
 
 export const Product = () => {
   const [product, setProduct] = useState<TypeDataProduct>();
+
   const [urlImage, setUrlImage] = useState("");
   const [stock, setStock] = useState<number | undefined>(0);
+  const [sizes, setSizes] = useState<string[] | undefined>([]);
   const [size, setSize] = useState<string>("");
+  console.log(sizes);
 
   const [amount, setAmount] = useState<number>(1);
 
@@ -28,6 +31,11 @@ export const Product = () => {
   const filterStock = (id: number) => {
     const stock = product?.urlImage.find((item) => item.id === id)?.stock;
     setStock(stock);
+  };
+
+  const filterSizes = (id: number) => {
+    const sizes = product?.urlImage.find((item) => item.id === id)?.sizes;
+    setSizes(sizes);
   };
 
   const filterSize = (number: string) => {
@@ -70,9 +78,13 @@ export const Product = () => {
             colors={product?.urlImage}
             filterUrlImage={filterUrlImage}
             filterStock={filterStock}
+            filterSizes={filterSizes}
           />
           {/* size */}
-          <ProductSize filterSize={filterSize} sizes={product?.sizes} />
+          <ProductSize
+            filterSize={filterSize}
+            sizes={sizes?.length ? sizes : product?.urlImage[0].sizes}
+          />
           {/* amount */}
           <ProductAmount amount={amount} setAmount={setAmount} />
           {/* buttonSubmit */}
