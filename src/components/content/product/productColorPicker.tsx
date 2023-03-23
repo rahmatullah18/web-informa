@@ -8,6 +8,7 @@ type TypeColorProps = {
   filterSizes: (id: number) => void;
 };
 
+// color picker
 export const ProductColorPicker = ({
   colors,
   filterUrlImage,
