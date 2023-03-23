@@ -9,8 +9,8 @@ type TypeProductAmount = {
 
 export const ProductAmount = ({ amount, setAmount }: TypeProductAmount) => {
   return (
-    <Box>
-      <Heading size="lg">Amount : </Heading>
+    <Box label="Masukan Jumlah Beli">
+      <Heading size="md">Jumlah : </Heading>
       <Input
         className="w-24"
         type="number"
