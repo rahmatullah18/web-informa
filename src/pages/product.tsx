@@ -10,14 +10,20 @@ import { Heading } from "../components/ui/heading/heading";
 import { dataProducts } from "../data/dataProducts";
 import { TypeDataProduct } from "../data/typeDataProduct";
 
+type TypeSizes = {
+  size: string;
+  stock: number;
+};
+
 export const Product = () => {
   const [product, setProduct] = useState<TypeDataProduct>();
 
   const [urlImage, setUrlImage] = useState("");
   const [stock, setStock] = useState<number | undefined>(0);
-  const [sizes, setSizes] = useState<string[] | undefined>([]);
+
+  const [sizes, setSizes] = useState<TypeSizes[] | undefined>([]);
+
   const [size, setSize] = useState<string>("");
-  console.log(sizes);
 
   const [amount, setAmount] = useState<number>(1);
 
@@ -28,8 +34,8 @@ export const Product = () => {
     setUrlImage(`${url}`);
   };
 
-  const filterStock = (id: number) => {
-    const stock = product?.urlImage.find((item) => item.id === id)?.stock;
+  const filterStock = (stock: number) => {
+    // const stock = product?.urlImage.find((item) => item.id === id)?.stock;
     setStock(stock);
   };
 
@@ -62,7 +68,8 @@ export const Product = () => {
         <ProductPreview
           urlImage={urlImage === "" ? product?.urlImage[0].url : urlImage}
           color={product?.product_color}
-          stock={stock === 0 ? product?.urlImage[0].stock : stock}
+          // stock={stock === 0 ? product?.urlImage[0].stock : stock}
+          stock={stock}
         />
         <div className="px-2 py-5 space-y-5 ">
           {/* heading */}
@@ -77,12 +84,12 @@ export const Product = () => {
           <ProductColorPicker
             colors={product?.urlImage}
             filterUrlImage={filterUrlImage}
-            filterStock={filterStock}
             filterSizes={filterSizes}
           />
           {/* size */}
           <ProductSize
             filterSize={filterSize}
+            filterStock={filterStock}
             sizes={sizes?.length ? sizes : product?.urlImage[0].sizes}
           />
           {/* amount */}

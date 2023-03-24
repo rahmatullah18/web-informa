@@ -4,15 +4,14 @@ import { useEffect, useState } from "react";
 type TypeColorProps = {
   colors?: { id: number; url: string; color: string }[];
   filterUrlImage: (id: number) => void;
-  filterStock: (id: number) => void;
+  // filterStock: (id: number) => void;
   filterSizes: (id: number) => void;
 };
 
-// color picker
 export const ProductColorPicker = ({
   colors,
   filterUrlImage,
-  filterStock,
+  // filterStock,
   filterSizes,
 }: TypeColorProps) => {
   const [selected, setSelected] = useState<number>();
@@ -20,7 +19,7 @@ export const ProductColorPicker = ({
   const handleSelected = (id: number) => {
     setSelected(id);
     filterUrlImage(id);
-    filterStock(id);
+    // filterStock(id);
     filterSizes(id);
   };
 

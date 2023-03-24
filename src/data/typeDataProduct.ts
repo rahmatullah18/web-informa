@@ -1,3 +1,7 @@
+type TypeSizes = {
+  size: string;
+  stock: number;
+};
 export type TypeDataProduct = {
   id: number;
   product_name: string;
@@ -5,8 +9,7 @@ export type TypeDataProduct = {
     id: number;
     url: string;
     color: string;
-    stock: number;
-    sizes: string[];
+    sizes: TypeSizes[];
   }[];
   product_price: number;
   product_color?: string;
