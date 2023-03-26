@@ -3,7 +3,7 @@ import { CartProvider } from "../../../store/cart/cartProvider";
 import { Cart } from "../../content/cart/cart";
 import { Content } from "../content/content";
 import { Navbar } from "../navbar/navbar";
-import { Sidebar } from "../sidebar/sidebar";
+// import { Sidebar } from "../sidebar/sidebar";
 
 type TypeContainerProps = {
   children: React.ReactNode;
@@ -15,8 +15,8 @@ export const Container = ({ children }: TypeContainerProps) => {
       <CartProvider>
         <Cart />
         <Navbar />
-        <div className="h-full md:grid md:grid-cols-6">
-          <Sidebar />
+        <div className="h-full">
+          {/* <Sidebar /> */}
           <Content>{children}</Content>
         </div>
       </CartProvider>

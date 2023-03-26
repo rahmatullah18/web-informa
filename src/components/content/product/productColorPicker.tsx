@@ -1,32 +1,27 @@
 import { Box } from "../../ui/box/box";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type TypeColorProps = {
   colors?: { id: number; url: string; color: string }[];
-  filterUrlImage: (id: number) => void;
-  // filterStock: (id: number) => void;
+  filterUrlImage: (url: string) => void;
   filterSizes: (id: number) => void;
+  filterColor: (color: string) => void;
 };
 
 export const ProductColorPicker = ({
   colors,
   filterUrlImage,
-  // filterStock,
+  filterColor,
   filterSizes,
 }: TypeColorProps) => {
   const [selected, setSelected] = useState<number>();
 
-  const handleSelected = (id: number) => {
+  const handleSelected = (id: number, url: string, color: string) => {
     setSelected(id);
-    filterUrlImage(id);
-    // filterStock(id);
+    filterUrlImage(url);
     filterSizes(id);
+    filterColor(color);
   };
-
-  useEffect(() => {
-    const findFirstId = colors?.find((item) => item.id);
-    setSelected(findFirstId?.id);
-  }, [colors]);
 
   const mapDataColors = colors?.map((color) => {
     return (
@@ -34,10 +29,10 @@ export const ProductColorPicker = ({
         key={color.id}
         className={`w-10  h-10 rounded-md  ${
           selected === color.id
-            ? "border-2 border-tertiary-100 shadow-xl"
+            ? "border-2 border-tertiary-100 shadow-xl scale-110"
             : "border shadow-md"
         } ${color.color}`}
-        onClick={() => handleSelected(color.id)}
+        onClick={() => handleSelected(color.id, color.url, color.color)}
       ></button>
     );
   });
