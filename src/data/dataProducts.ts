@@ -8,6 +8,7 @@ import { TypeDataProduct } from "./typeDataProduct";
 export const dataProducts: TypeDataProduct[] = [
   {
     id: 1,
+    category: [{ id: 1, title: "shoes-men", slug: "shoes-men", class: "men" }],
     product_name: "Nike air 1",
     urlImage: [
       {
@@ -37,6 +38,7 @@ export const dataProducts: TypeDataProduct[] = [
   },
   {
     id: 2,
+    category: [{ id: 2, title: "shoes-men", slug: "shoes-men", class: "men" }],
     product_name: "Nike air 2",
     urlImage: [
       {
@@ -65,6 +67,9 @@ export const dataProducts: TypeDataProduct[] = [
   },
   {
     id: 3,
+    category: [
+      { id: 1, title: "shoes-women", slug: "shoes-women", class: "women" },
+    ],
     product_name: "Nike air 3",
     urlImage: [
       {
@@ -91,6 +96,9 @@ export const dataProducts: TypeDataProduct[] = [
   },
   {
     id: 4,
+    category: [
+      { id: 1, title: "shoes-women", slug: "shoes-women", class: "women" },
+    ],
     product_name: "Nike air 4",
     urlImage: [
       {
@@ -120,6 +128,9 @@ export const dataProducts: TypeDataProduct[] = [
   },
   {
     id: 5,
+    category: [
+      { id: 1, title: "shoes-women", slug: "shoes-women", class: "women" },
+    ],
     product_name: "Nike air 5",
     urlImage: [
       {

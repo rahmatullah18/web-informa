@@ -3,20 +3,25 @@ import React, { Fragment } from "react";
 type TypeHeadingProps = {
   size: "md" | "lg" | "xl";
   children: React.ReactNode;
+  className?: string;
 };
-export const Heading = ({ size, children }: TypeHeadingProps) => {
+export const Heading = ({ size, children, className }: TypeHeadingProps) => {
   let heading: React.ReactNode;
   switch (size) {
     case "lg":
       heading = (
-        <div className={`text-3xl font-bold text-secondary-200 capitalize `}>
+        <div
+          className={`${className} text-3xl font-bold text-secondary-200 capitalize `}
+        >
           {children}
         </div>
       );
       break;
     case "xl":
       heading = (
-        <div className={`text-5xl font-bold text-secondary-200 capitalize `}>
+        <div
+          className={`${className} text-5xl font-bold text-secondary-200 capitalize `}
+        >
           {children}
         </div>
       );
@@ -24,7 +29,9 @@ export const Heading = ({ size, children }: TypeHeadingProps) => {
     // md
     default:
       heading = (
-        <div className={`text-xl font-bold text-secondary-200 capitalize `}>
+        <div
+          className={`${className} text-xl font-bold text-secondary-200 capitalize `}
+        >
           {children}
         </div>
       );

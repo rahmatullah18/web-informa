@@ -5,6 +5,7 @@ type TypeSizes = {
 export type TypeDataProduct = {
   id: number;
   product_name: string;
+  category: { id: number; title: string; class: string; slug: string }[];
   urlImage: {
     id: number;
     url: string;

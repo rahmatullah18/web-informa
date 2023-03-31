@@ -1,7 +1,7 @@
 type TypeDashboradJumbotronProps = {
-  image: string;
-  title: string;
-  bgColor: string;
+  image?: string;
+  title?: string;
+  bgColor?: string;
 };
 
 export const DashboardJumbotron = ({
