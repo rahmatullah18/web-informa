@@ -1,5 +1,5 @@
 import React from "react";
-import { CartProvider } from "../../../store/cart/cartProvider";
+
 import { Cart } from "../../content/cart/cart";
 import { Content } from "../content/content";
 import { Navbar } from "../navbar/navbar";
@@ -12,14 +12,12 @@ type TypeContainerProps = {
 export const Container = ({ children }: TypeContainerProps) => {
   return (
     <div className="h-screen">
-      <CartProvider>
-        <Cart />
-        <Navbar />
-        <div className="h-full">
-          {/* <Sidebar /> */}
-          <Content>{children}</Content>
-        </div>
-      </CartProvider>
+      <Cart />
+      <Navbar />
+      <div className="h-full">
+        {/* <Sidebar /> */}
+        <Content>{children}</Content>
+      </div>
     </div>
   );
 };

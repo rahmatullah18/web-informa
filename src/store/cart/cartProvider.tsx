@@ -7,8 +7,8 @@ type TypeCartProviderProps = {
 
 export const CartProvider = ({ children }: TypeCartProviderProps) => {
   const [showCart, setShowCart] = useState(false);
-  const handleShowCart = () => {
-    setShowCart(!showCart);
+  const handleShowCart = (boolean: boolean) => {
+    setShowCart(boolean);
   };
 
   const cartContext = {

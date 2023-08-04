@@ -2,28 +2,24 @@ import { Box } from "../../ui/box/box";
 
 type TypeSizes = {
   size: string;
-  stock: number;
+  id: number;
 };
 
 type TypeProductSize = {
   sizes?: TypeSizes[];
-  filterSize: (number: string | undefined) => void;
-  filterStock: (stock: number) => void;
-  handleSelectedSize: (size: string) => void;
   selectedSize: string | undefined;
+  handleSelectedSize: (size: string) => void;
 };
 
 export const ProductSize = ({
   sizes,
-  filterSize,
-  filterStock,
-  handleSelectedSize,
   selectedSize,
+  handleSelectedSize,
 }: TypeProductSize) => {
   const mapDataSizes = sizes?.map((size, idx) => {
     return (
       <button
-        onClick={() => handleSelected(size.size, size.stock)}
+        onClick={() => handleSelected(size.size)}
         key={idx}
         className={`flex items-center justify-center  border-2 rounded-md flex-col space-y-1 p-2 ${
           selectedSize === size.size
@@ -32,15 +28,15 @@ export const ProductSize = ({
         }`}
       >
         <h1>{size.size}</h1>
-        <h2 className="text-xs">(Stok : {size.stock})</h2>
+        {/* <h2 className="text-xs">(Stok : {size.stock})</h2> */}
       </button>
     );
   });
 
-  const handleSelected = (size: string, stock: number) => {
-    filterSize(size);
+  const handleSelected = (size: string) => {
+    // filterSize(size);
     handleSelectedSize(size);
-    filterStock(stock);
+    // filterStock(stock);
   };
   return (
     <Box label="Pilih Ukuran">

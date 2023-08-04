@@ -10,11 +10,13 @@ export const DashboardJumbotron = ({
   bgColor,
 }: TypeDashboradJumbotronProps) => {
   return (
-    <div className={`relative p-2 m-2 rounded-lg shadow-md h-60 ${bgColor}`}>
-      <h1 className="absolute text-6xl font-bold text-white left-4 top-10">
+    <div
+      className={`relative flex flex-col justify-center items-center p-2 m-2 rounded-lg shadow-md h-40 space-y-4 ${bgColor}`}
+    >
+      <img src={image} alt="" className="w-16 h-16 " />
+      <h1 className="text-4xl font-bold text-center text-white left-4">
         {title}
       </h1>
-      <img src={image} alt="" className="absolute right-0 w-60 h-60" />
     </div>
   );
 };

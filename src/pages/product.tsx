@@ -1,113 +1,135 @@
-import { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useCallback, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProductAmount } from "../components/content/product/productAmount";
 import { ProductColorPicker } from "../components/content/product/productColorPicker";
 import { ProductPreview } from "../components/content/product/productPreview";
 import { ProductSize } from "../components/content/product/productSize";
 import { Container } from "../components/layouts/container/container";
-import { Button } from "../components/ui/button/button";
 import { Heading } from "../components/ui/heading/heading";
-import { dataProducts } from "../data/dataProducts";
-import { TypeDataProduct } from "../data/typeDataProduct";
+import axios from "axios";
+import { Loading } from "../components/ui/loading/loading";
+import { useCart } from "react-use-cart";
+import { CartContext } from "../store/cart/cartContext";
+import { formatRupiah } from "../helpers/formatRupiah";
 
-type TypeSizes = {
-  size: string;
-  stock: number;
-};
+const sizes = [
+  { size: "XS", id: 1 },
+  { size: "M", id: 1 },
+  { size: "L", id: 1 },
+  { size: "XL", id: 1 },
+  { size: "XXL", id: 1 },
+];
 
 export const Product = () => {
-  const [product, setProduct] = useState<TypeDataProduct>();
+  const [product, setProduct] = useState<any>();
 
-  const [urlImage, setUrlImage] = useState("");
   const [color, setColor] = useState<string | undefined>("");
-  const [stock, setStock] = useState<number | undefined>(0);
-  const [sizes, setSizes] = useState<TypeSizes[] | undefined>([]);
-  const [size, setSize] = useState<string | undefined>("");
-  const [selectedSize, setSelectedSize] = useState<string | undefined>("");
+  const [stock, setStock] = useState<number>(0);
 
-  console.log({ color, stock, size });
+  // const [sizes, setSizes] = useState<TypeSizes[] | undefined>([]);
+  const [selectedSize, setSelectedSize] = useState<string | undefined>("");
+  const [amount, setAmount] = useState<number>(1);
+
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  // cart
+  const { addItem } = useCart();
+
+  // contextCart
+  const cartCtx = useContext(CartContext);
 
   // function for handleSize selected
   const handleSelectedSize = (size: string) => {
     setSelectedSize(size);
   };
 
-  const [amount, setAmount] = useState<number>(1);
   const { slug } = useParams();
 
-  const filterUrlImage = (url: string) => {
-    setUrlImage(`${url}`);
-  };
-
-  const filterColor = (color: string) => {
+  const filterColor = (color: string, stock: number) => {
     setColor(color);
+    setStock(stock);
     // jika ganti warna maka size kosong
     setSelectedSize("");
-    setSize("");
   };
 
-  const filterStock = (stock: number) => {
-    setStock(stock);
-  };
-
-  const filterSizes = (id: number) => {
-    const sizes = product?.urlImage.find((item) => item.id === id)?.sizes;
-    setSizes(sizes);
-  };
-
-  const filterSize = useCallback((number: string | undefined) => {
-    setSize(number);
-  }, []);
-
-  const filterProduct = useCallback(() => {
+  const getProductBySlug = useCallback(async () => {
+    setLoading(true);
     try {
-      const filteredProduct = dataProducts.find(
-        (product) => product.slug === slug
-      );
-      setProduct(filteredProduct);
-    } catch (error) {}
-  }, [slug]);
+      const res = await axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_API_URL}/product/get-product-by-slug/${slug}`,
+      });
+      setProduct(res?.data);
+    } catch (error) {
+      navigate("/server-error");
+    }
+    setLoading(false);
+  }, [slug, navigate]);
+
+  const handleAddItem = () => {
+    const item: any = {
+      id: product.id,
+      price: parseInt(product.product_price),
+      color,
+      size: selectedSize,
+      stock,
+      product_name: product.product_name,
+      product_slug: product.product_slug,
+      product_url: product.prduct_image,
+    };
+    addItem(item, amount);
+    cartCtx.handleShowCart(true);
+  };
 
   useEffect(() => {
-    filterProduct();
-  }, [filterProduct]);
+    getProductBySlug();
+  }, [getProductBySlug]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Container>
       <div className="flex flex-col p-2 ">
         {/* product preview */}
         <ProductPreview
-          urlImage={urlImage === "" ? product?.urlImage[0].url : urlImage}
+          urlImage={`${process.env.REACT_APP_IMAGE_URL}/${product?.prduct_image}`}
           color={product?.product_color}
         />
         <div className="px-2 py-5 space-y-5 ">
           {/* heading */}
-          <Heading size="xl">{product?.product_name}</Heading>
+          <Heading size="md">{product?.product_name}</Heading>
           {/* harga */}
           <div className="text-2xl font-bold text-tertiary-100">
-            RP.{product?.product_price}
+            {formatRupiah(product?.product_price)}
           </div>
           {/* color */}
           <ProductColorPicker
+            colors={product?.type_products}
             filterColor={filterColor}
-            colors={product?.urlImage}
-            filterUrlImage={filterUrlImage}
-            filterSizes={filterSizes}
           />
           {/* size */}
           <ProductSize
-            filterSize={filterSize}
-            filterStock={filterStock}
-            sizes={sizes?.length ? sizes : product?.urlImage[0].sizes}
-            handleSelectedSize={handleSelectedSize}
+            // filterSize={filterSize}
+            sizes={sizes}
             selectedSize={selectedSize}
+            handleSelectedSize={handleSelectedSize}
           />
           {/* amount */}
-          <ProductAmount amount={amount} setAmount={setAmount} />
+          <ProductAmount stock={stock} amount={amount} setAmount={setAmount} />
           {/* buttonSubmit */}
-          <span className="flex justify-end">
-            <Button size="lg">Add to Cart</Button>
-          </span>
+          <div className="flex justify-end">
+            <button
+              onClick={() => handleAddItem()}
+              className="px-4 py-2 text-base font-light capitalize transition ease-in-out rounded-md shadow hover:scale-110 bg-secondary-200 text-secondary-100"
+              disabled={color !== "" && selectedSize !== "" ? false : true}
+            >
+              Tambah ke Keranjang
+            </button>
+            {/* <Button size="lg">Add to Cart</Button> */}
+          </div>
         </div>
       </div>
     </Container>

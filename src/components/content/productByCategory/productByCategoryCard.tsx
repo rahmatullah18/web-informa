@@ -1,43 +1,32 @@
 import { Link } from "react-router-dom";
-
-type TypeCardProps = {
-  amount: number;
-  category: { id: number; class: string; slug: string; title: string }[];
-  product_price: number;
-  urlImge: {
-    color: string;
-    id: number;
-    sizes: { size: string; stock: number }[];
-    url: string;
-  }[];
-  product_color?: string;
-  product_name: string;
-  slug: string;
-};
+import { TypeDataFetchCategory } from "../../../data/typeDataFetchCategory";
 
 export const ProductByCategoryCard = ({
-  amount,
-  category,
+  prduct_image,
+  product_slug,
+  product_title,
   product_price,
-  urlImge,
-  product_color,
-  product_name,
-  slug,
-}: TypeCardProps) => {
+}: TypeDataFetchCategory) => {
   return (
-    <Link to={`/product/${slug}`}>
+    <Link to={`/product/${product_slug}`}>
       <div
-        className={`relative w-full flex-shrink-0 h-40 
-          ${product_color} rounded-lg  shadow-md`}
+        className={`relative w-full flex-shrink-0 h-52 
+        rounded-lg overflow-hidden  shadow-md`}
       >
         <img
-          src={urlImge[0].url}
+          src={`${process.env.REACT_APP_IMAGE_URL}/${prduct_image}`}
           alt=""
           className="object-cover w-full h-full "
         />
-        <span className="absolute font-bold top-1 left-1 text-primary-200">
-          {product_name}
-        </span>
+        <div className="absolute bottom-0 flex flex-col p-1 space-y-1 leading-3 bg-opacity-40 bg-primary-100">
+          <span className="text-xs font-semibold opacity-100 drop-shadow-xl text-primary-200">
+            {product_title}
+          </span>
+
+          <span className="font-semibold opacity-100 ext-xs drop-shadow-xl text-primary-200">
+            {product_price}
+          </span>
+        </div>
       </div>
     </Link>
   );

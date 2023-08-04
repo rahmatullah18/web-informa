@@ -1,18 +1,18 @@
-import greenShoes from "../components/assets/greenShoes.svg";
-import blackNike from "../components/assets/blackNike.svg";
-import redShoes from "../components/assets/shoes.svg";
-import blueShoes from "../components/assets/blueNike.svg";
-import orangeShoes from "../components/assets/orangeNike.svg";
-import whiteShoes from "../components/assets/whiteNike.svg";
+import gambar1 from "../components/assets/gambar1.jpg";
+import gambar2 from "../components/assets/gambar2.jpg";
+import gambar3 from "../components/assets/gambar3.jpg";
+import gambar4 from "../components/assets/gambar4.jpg";
+import gambar5 from "../components/assets/gambar5.jpg";
+import logoMaelo from "../components/assets/logo_maelo.svg";
 export const dataDashboard = {
   jumbotron: {
-    image: greenShoes,
-    title: "Nike",
+    image: logoMaelo,
+    title: "Toko Maelo",
     bgColor: "bg-primary-100",
   },
   title: "The Best Product We Have",
   category1: {
-    title: "Shoes Men",
+    title: "Kaos",
     class: "men",
     slug: "shoes-men",
     product: [
@@ -22,7 +22,7 @@ export const dataDashboard = {
         product_color: "bg-[#F8C166]",
         slug: "nike-air-1",
         category: [{ id: 1, title: "shoes-men", slug: "shoes-men" }],
-        urlImage: redShoes,
+        urlImage: gambar1,
       },
       {
         id: 2,
@@ -30,12 +30,12 @@ export const dataDashboard = {
         product_color: "bg-[#F8C166]",
         slug: "nike-air-2",
         category: [{ id: 1, title: "shoes-men", slug: "shoes-men" }],
-        urlImage: orangeShoes,
+        urlImage: gambar2,
       },
     ],
   },
   category2: {
-    title: "Shoes Women",
+    title: "Hoddie",
     class: "women",
     slug: "shoes-women",
     product: [
@@ -45,7 +45,7 @@ export const dataDashboard = {
         product_color: "bg-[#3583DD]",
         slug: "nike-air-3",
         category: [{ id: 1, title: "shoes-men", slug: "shoes-men" }],
-        urlImage: blueShoes,
+        urlImage: gambar3,
       },
       {
         id: 4,
@@ -53,7 +53,7 @@ export const dataDashboard = {
         product_color: "bg-[#3583DD]",
         slug: "nike-air-4",
         category: [{ id: 1, title: "shoes-men", slug: "shoes-men" }],
-        urlImage: whiteShoes,
+        urlImage: gambar4,
       },
       {
         id: 5,
@@ -61,7 +61,38 @@ export const dataDashboard = {
         product_color: "bg-[#000]",
         slug: "nike-air-5",
         category: [{ id: 1, title: "shoes-men", slug: "shoes-men" }],
-        urlImage: blackNike,
+        urlImage: gambar5,
+      },
+    ],
+  },
+  category3: {
+    title: "Jaket",
+    class: "women",
+    slug: "shoes-women",
+    product: [
+      {
+        id: 3,
+        product_name: "Nike air 3",
+        product_color: "bg-[#3583DD]",
+        slug: "nike-air-3",
+        category: [{ id: 1, title: "shoes-men", slug: "shoes-men" }],
+        urlImage: gambar3,
+      },
+      {
+        id: 4,
+        product_name: "Nike air 4",
+        product_color: "bg-[#3583DD]",
+        slug: "nike-air-4",
+        category: [{ id: 1, title: "shoes-men", slug: "shoes-men" }],
+        urlImage: gambar4,
+      },
+      {
+        id: 5,
+        product_name: "Nike air 5",
+        product_color: "bg-[#000]",
+        slug: "nike-air-5",
+        category: [{ id: 1, title: "shoes-men", slug: "shoes-men" }],
+        urlImage: gambar5,
       },
     ],
   },

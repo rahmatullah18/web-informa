@@ -1,58 +1,42 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Container } from "../components/layouts/container/container";
-import { dataProducts } from "../data/dataProducts";
-import { TypeDataProduct } from "../data/typeDataProduct";
-import { dataCategory } from "../data/dataCategory";
 import { Heading } from "../components/ui/heading/heading";
 import { ProductsByCategoryFilter } from "../components/content/productByCategory/productByCategoryFilter";
 import { ProductByCategoryProducts } from "../components/content/productByCategory/productByCategoryProducts";
-
-type TypeCategory = {
-  id: number;
-  title: string;
-  class: string;
-  slug: string;
-};
+import axios from "axios";
+import { TypeDataFetchCategory } from "../data/typeDataFetchCategory";
 
 export const ProductsByCategory = () => {
-  const { category: slug } = useParams();
-  const [products, setProducts] = useState<TypeDataProduct[]>();
+  const [products, setProducts] = useState<TypeDataFetchCategory[]>();
+  const [categoryTitle, setCategoryTitle] = useState<string>();
 
-  const [category, setCategory] = useState<TypeCategory>();
-  const productsLength = products?.length;
+  const { categorySlug } = useParams();
 
-  const filterCategory = useCallback(
-    (products: TypeDataProduct[]) => {
-      const filteredData = products.filter((product) => {
-        return product.category.some((cate) => cate.slug === slug);
+  const filterCategory = useCallback(async () => {
+    try {
+      const res = await axios({
+        method: "GET",
+        url: `http://localhost:8181/api/product/get-products-by-category/${categorySlug}`,
       });
-      setProducts(filteredData);
-    },
-    [slug]
-  );
-
-  const findCatagory = useCallback(
-    (categories: TypeCategory[]) => {
-      const findData = categories.find((category) => category.slug === slug);
-      setCategory(findData);
-    },
-    [slug]
-  );
+      const data = await res.data;
+      setProducts(data);
+      setCategoryTitle(data[0].category_title);
+    } catch (error) {}
+  }, [categorySlug]);
 
   useEffect(() => {
-    filterCategory(dataProducts);
-    findCatagory(dataCategory);
-  }, [filterCategory, findCatagory]);
+    filterCategory();
+  }, [filterCategory]);
 
   return (
     <Container>
       <div className="p-2 mt-5 space-y-5">
-        <Heading size="lg">{category?.title}</Heading>
+        <Heading size="lg">{categoryTitle}</Heading>
         <div className="flex items-center justify-between">
           <div className="flex flex-col items-center justify-center">
-            <div>Result Product</div>
-            <div>{productsLength} item</div>
+            <div>Jumlah</div>
+            <div>({products?.length}) produk</div>
           </div>
           <ProductsByCategoryFilter />
         </div>

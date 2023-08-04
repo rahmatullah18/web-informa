@@ -1,10 +1,11 @@
+import axios from "axios";
 import { Container } from "../components/layouts/container/container";
 import { DashboardJumbotron } from "../components/content/dashboard/dashboardJumbotron";
 import { dataDashboard } from "../data/dataDashboard";
-import { useEffect, useState } from "react";
-import { DashboardTitle } from "../components/content/dashboard/dashboardTitle";
+import { useCallback, useEffect, useState } from "react";
 import { DashboardCategoryProduct } from "../components/content/dashboard/dashboardCategoryProduct";
-import { DashboardButton } from "../components/content/dashboard/dashboardButton";
+import { TypeDataFetchCategory } from "../data/typeDataFetchCategory";
+import { useNavigate } from "react-router-dom";
 
 type TypeDataJumbotron = {
   image?: string;
@@ -12,36 +13,31 @@ type TypeDataJumbotron = {
   bgColor?: string;
 };
 
-type productDashboard = {
-  id: number;
-  product_color: string;
-  product_name: string;
-  slug: string;
-  urlImage: string;
-};
-
-type TypeDataCatagoryProduct = {
-  title: string;
-  product: productDashboard[];
-  class: string;
-  slug: string;
-};
-
 export const Dashboard = () => {
   const [dataJumbotron, setDataJumbotron] = useState<TypeDataJumbotron>();
-  const [title, setTitle] = useState<string>();
-  const [categoryProduct1, setCategoryProduct1] =
-    useState<TypeDataCatagoryProduct>();
-  const [categoryProduct2, setCategoryProduct2] =
-    useState<TypeDataCatagoryProduct>();
-
+  const [categories, setCategories] = useState<TypeDataFetchCategory[]>();
+  const navigate = useNavigate();
   // filter dataDashboard
   useEffect(() => {
     setDataJumbotron(dataDashboard && dataDashboard.jumbotron);
-    setTitle(dataDashboard && dataDashboard.title);
-    setCategoryProduct1(dataDashboard && dataDashboard.category1);
-    setCategoryProduct2(dataDashboard && dataDashboard.category2);
   }, []);
+
+  const getProductsFilterByCategory = useCallback(async () => {
+    try {
+      const productsCategory = await axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/product/products-filter-by-category`,
+      });
+      const res = await productsCategory.data;
+      setCategories(res);
+    } catch (error) {
+      navigate("/server-error");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    getProductsFilterByCategory();
+  }, [getProductsFilterByCategory]);
 
   return (
     <Container>
@@ -52,24 +48,8 @@ export const Dashboard = () => {
           title={dataJumbotron?.title}
           bgColor={dataJumbotron?.bgColor}
         />
-        {/* title ads */}
-        <DashboardTitle title={title} />
-        {/* button  */}
-        <DashboardButton />
-        {/* category1 */}
-        <DashboardCategoryProduct
-          title={categoryProduct1?.title}
-          products={categoryProduct1?.product}
-          class={categoryProduct1?.class}
-          slug={categoryProduct1?.slug}
-        />
-        {/* category2 */}
-        <DashboardCategoryProduct
-          title={categoryProduct2?.title}
-          products={categoryProduct2?.product}
-          class={categoryProduct2?.class}
-          slug={categoryProduct2?.slug}
-        />
+        {/* product filter by category */}
+        <DashboardCategoryProduct data={categories} />
       </div>
     </Container>
   );

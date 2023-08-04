@@ -4,6 +4,7 @@ type TypeInputText = {
   placeholder: string;
   value?: number;
   handleOnChange?: React.ChangeEventHandler<HTMLInputElement>;
+  disable?: boolean;
 };
 
 export const Input = ({
@@ -12,6 +13,7 @@ export const Input = ({
   placeholder,
   value,
   handleOnChange,
+  disable,
 }: TypeInputText) => {
   return (
     <input
@@ -21,6 +23,8 @@ export const Input = ({
       value={value}
       onChange={handleOnChange}
       min={"1"}
+      required
+      disabled={disable ? true : false}
     />
   );
 };
