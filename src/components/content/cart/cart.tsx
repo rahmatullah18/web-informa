@@ -7,7 +7,7 @@ import { formatRupiah } from "../../../helpers/formatRupiah";
 
 export const Cart = () => {
   const cartCtx = useContext(CartContext);
-  const { items, removeItem } = useCart();
+  const { items, removeItem, cartTotal, updateItemQuantity } = useCart();
   const navigate = useNavigate();
 
   const redirectToProduct = (slug: string) => {
@@ -48,7 +48,7 @@ export const Cart = () => {
                   className="flex justify-center space-x-2 rounded-md hover:bg-gray-200"
                 >
                   <div
-                    className={`relative w-20 space-y-5 rounded-lg overflow-hidden shadow-md h-28`}
+                    className={`relative w-20 space-y-5 rounded-lg overflow-hidden shadow-md h-32`}
                   >
                     <img
                       src={`${process.env.REACT_APP_IMAGE_URL}/${item.product_url}`}
@@ -56,26 +56,54 @@ export const Cart = () => {
                       className="w-full h-full object-fit"
                     />
                   </div>
-                  <div className="flex flex-col w-full space-y-1 ">
+                  <div className="flex flex-col w-full space-y-2 ">
                     <div className="text-xs">{item.product_name}</div>
                     <div className="text-xs">
                       <span className="font-semibold">Harga: </span>
                       {formatRupiah(item.price)}
                     </div>
                     <div className="text-xs">
-                      <span className="font-semibold">Jumlah: </span>
-                      {item.quantity}
+                      {/* <span className="font-semibold mr-2">Jumlah: </span> */}
+                      <span className="space-x-2">
+                        <button
+                          className="text-lg"
+                          onClick={() =>
+                            updateItemQuantity(
+                              item.id,
+                              item.quantity !== undefined
+                                ? item.quantity - 1
+                                : 1
+                            )
+                          }
+                        >
+                          -
+                        </button>
+                        <span className="text-lg">{item.quantity}</span>
+                        <button
+                          className="text-lg"
+                          onClick={() =>
+                            updateItemQuantity(
+                              item.id,
+                              item.quantity !== undefined
+                                ? item.quantity + 1
+                                : 1
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                      </span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => redirectToProduct(item.product_slug)}
-                        className="p-1 text-xs text-white rounded-sm bg-secondary-200"
+                        className="p-1 mt-2 text-xs text-white rounded-sm bg-secondary-200"
                       >
                         Detail
                       </button>
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="p-1 text-xs text-white bg-red-500 rounded-sm"
+                        className="p-1 mt-2 text-xs text-white bg-red-500 rounded-sm"
                       >
                         Hapus
                       </button>
@@ -84,12 +112,16 @@ export const Cart = () => {
                 </div>
               );
             })}
-            <div className="flex justify-end space-x-2">
+            <div className="flex justify-end">
+              Total : {formatRupiah(cartTotal)}{" "}
+            </div>
+            <hr className="border border-gray-500" />
+            <div className="flex justify-between space-x-2">
               <button
                 onClick={() => redirectToHome()}
                 className="text-secondary-200"
               >
-                Kembali
+                Belanja lagi
               </button>
               <button
                 className="text-red-500"
