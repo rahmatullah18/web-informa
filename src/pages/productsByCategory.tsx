@@ -18,7 +18,7 @@ export const ProductsByCategory = () => {
     try {
       const res = await axios({
         method: "GET",
-        url: `http://localhost:8181/api/product/get-products-by-category/${categorySlug}`,
+        url: `${process.env.REACT_APP_API_URL}/product/get-products-by-category/${categorySlug}`,
       });
       const data = await res.data;
       setProducts(data);
