@@ -10,8 +10,8 @@ type TypeContainerProps = {
 
 export const Container = ({ children }: TypeContainerProps) => {
   return (
-    <>
-      <div className="h-screen">
+    <div className="h-full md:flex md:justify-center md:items-center md:h-full ">
+      <div className="md:bg-white md:shadow-xl md:w-96">
         <Cart />
         <Navbar />
         <div className="h-full">
@@ -19,6 +19,6 @@ export const Container = ({ children }: TypeContainerProps) => {
           <Content>{children}</Content>
         </div>
       </div>
-    </>
+    </div>
   );
 };

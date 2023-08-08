@@ -6,6 +6,7 @@ import { ProductsByCategoryFilter } from "../components/content/productByCategor
 import { ProductByCategoryProducts } from "../components/content/productByCategory/productByCategoryProducts";
 import axios from "axios";
 import { TypeDataFetchCategory } from "../data/typeDataFetchCategory";
+import { Helmet } from "react-helmet";
 
 export const ProductsByCategory = () => {
   const [products, setProducts] = useState<TypeDataFetchCategory[]>();
@@ -31,6 +32,10 @@ export const ProductsByCategory = () => {
 
   return (
     <Container>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Toko Maelo - {`${categoryTitle ? categoryTitle : ""}`}</title>
+      </Helmet>
       <div className="p-2 mt-5 space-y-5">
         <Heading size="lg">{categoryTitle}</Heading>
         <div className="flex items-center justify-between">

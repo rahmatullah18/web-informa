@@ -14,6 +14,8 @@ import { AdminProducts } from "./pages/adminProducts";
 import { PageNotFound } from "./pages/pageNotFound";
 import { AdminProductAdd } from "./pages/adminProductAdd";
 import { AdminProductUpdate } from "./pages/adminProductUpdate";
+import { AdminOrders } from "./pages/adminOrders";
+import { AdminReport } from "./pages/adminReport";
 export default function App() {
   return (
     <CartProvider>
@@ -31,6 +33,7 @@ export default function App() {
         <Route path="/checkout" element={<Checkout />} />
 
         {/* admin */}
+        {/* admin */}
         <Route path="/login" element={<Login />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin-products" element={<AdminProducts />} />
@@ -39,6 +42,9 @@ export default function App() {
           path="/admin-product/update/:slug"
           element={<AdminProductUpdate />}
         />
+        {/* order */}
+        <Route path="/admin-orders" element={<AdminOrders />} />
+        <Route path="/admin-report" element={<AdminReport />} />
       </Routes>
     </CartProvider>
   );

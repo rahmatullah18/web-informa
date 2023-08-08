@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Loading } from "../components/ui/loading/loading";
+import { Helmet } from "react-helmet";
 
 export const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -36,6 +37,7 @@ export const Login = () => {
         title: "Oops...",
         text: "Login Gagal",
       });
+      setPassword("");
       setLoading(false);
     }
   };
@@ -52,6 +54,10 @@ export const Login = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Admin - Login</title>
+      </Helmet>
       <div className="flex flex-col items-center justify-center m-4 space-y-4">
         <img
           src={`${process.env.REACT_APP_URL}/icons/loginIcon.svg`}
@@ -72,7 +78,7 @@ export const Login = () => {
             <input
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              type="text"
+              type="password"
               placeholder="Masukan Password"
               className="w-full p-2 text-lg rounded-md"
             />

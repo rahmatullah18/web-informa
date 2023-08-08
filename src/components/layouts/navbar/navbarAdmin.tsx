@@ -9,10 +9,7 @@ export const NavbarAdmin = () => {
   return (
     <nav className={` flex items-center justify-between h-12 px-2`}>
       <div className="flex items-center gap-4">
-        <Link
-          to="/admin-dashboard"
-          className="font-bold text-md text-tertiary-100"
-        >
+        <Link to="/" className="font-bold text-md text-tertiary-100">
           <img src={logoMaelo} alt="logo-maelo" className="w-10 h-10" />
         </Link>
         <Link
@@ -23,9 +20,9 @@ export const NavbarAdmin = () => {
         </Link>
         <Link
           className="font-bold text-md text-tertiary-100"
-          to={"/admin-category"}
+          to={"/admin-orders"}
         >
-          Kategori
+          Pesanan
         </Link>
         <Link
           className="font-bold text-md text-tertiary-100"

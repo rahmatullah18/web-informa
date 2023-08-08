@@ -5,6 +5,7 @@ import axios from "axios";
 import { Loading } from "../components/ui/loading/loading";
 import Swal from "sweetalert2";
 import slugify from "../helpers/formatSlug";
+import { Helmet } from "react-helmet";
 
 export const AdminProductAdd = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -103,7 +104,10 @@ export const AdminProductAdd = () => {
         });
         navigate("/admin-products");
       } catch (error) {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Lagi ada kendala",
+        });
       }
     }
 
@@ -120,6 +124,10 @@ export const AdminProductAdd = () => {
 
   return (
     <ContainerAdmin>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Toko Maelo - Tambah Produk</title>
+      </Helmet>
       <div className="mb-96">
         <form className="space-y-4" onSubmit={handleSubmitForm}>
           <div>

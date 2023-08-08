@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Loading } from "../components/ui/loading/loading";
 import Swal from "sweetalert2";
 import slugify from "../helpers/formatSlug";
+import { Helmet } from "react-helmet";
 
 export const AdminProductUpdate = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -151,7 +152,12 @@ export const AdminProductUpdate = () => {
 
   return (
     <ContainerAdmin>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Toko Maelo - Update Produk</title>
+      </Helmet>
       <div className="mb-96">
+        <h1 className="my-4 text-xl font-bold"> Edit Produk</h1>
         <form className="space-y-4" onSubmit={handleSubmitForm}>
           <div>
             <input

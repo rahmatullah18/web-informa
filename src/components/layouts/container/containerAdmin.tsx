@@ -15,7 +15,7 @@ export const ContainerAdmin = ({ children }: TypeContainerProps) => {
     }
   }, [navigate]);
   return (
-    <>
+    <div className="h-full md:flex md:justify-center md:items-center md:h-full">
       <div className="h-screen">
         <NavbarAdmin />
         <div className="h-full p-2">
@@ -23,6 +23,6 @@ export const ContainerAdmin = ({ children }: TypeContainerProps) => {
           <ContentAdmin>{children}</ContentAdmin>
         </div>
       </div>
-    </>
+    </div>
   );
 };

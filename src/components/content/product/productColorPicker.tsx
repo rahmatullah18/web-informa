@@ -44,7 +44,7 @@ export const ProductColorPicker = ({ colors, filterColor }: TypeColorProps) => {
     );
   });
   return (
-    <Box label="Pilih Warna Favorit">
+    <Box label="Pilih Warna yang Tersedia">
       <div className="flex items-center space-x-2">{mapDataColors}</div>
     </Box>
   );

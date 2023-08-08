@@ -32,7 +32,7 @@ export const Cart = () => {
           <span className="font-bold">Keranjang</span>
           <span
             onClick={() => cartCtx.handleShowCart(false)}
-            className="text-lg font-bold text-red-500"
+            className="text-lg font-bold text-red-500 cursor-pointer"
           >
             X
           </span>
@@ -63,7 +63,7 @@ export const Cart = () => {
                       {formatRupiah(item.price)}
                     </div>
                     <div className="text-xs">
-                      {/* <span className="font-semibold mr-2">Jumlah: </span> */}
+                      {/* <span className="mr-2 font-semibold">Jumlah: </span> */}
                       <span className="space-x-2">
                         <button
                           className="text-lg"

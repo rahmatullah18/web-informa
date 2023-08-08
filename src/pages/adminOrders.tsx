@@ -1,44 +1,44 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ContainerAdmin } from "../components/layouts/container/containerAdmin";
-import { Loading } from "../components/ui/loading/loading";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Loading } from "../components/ui/loading/loading";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 
-export const AdminProducts = () => {
-  const [products, setProducts] = useState<any>([]);
+export const AdminOrders = () => {
+  const [orders, setOrders] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const fetchAllProduct = useCallback(async () => {
+
+  const fetchAllOrders = useCallback(async () => {
     setIsLoading(true);
     try {
       const res = await axios({
         method: "GET",
-        url: `${process.env.REACT_APP_API_URL}/product/get-all-product`,
+        url: `${process.env.REACT_APP_API_URL}/order/get-all-orders`,
       });
-      setProducts(res.data);
+      setOrders(res.data);
       setIsLoading(false);
     } catch (error) {
       navigate("/server-error");
     }
   }, [navigate]);
 
-  const handleDelete = useCallback(async (slug: string) => {
+  const handleDelete = useCallback(async (id: string) => {
     setIsLoading(true);
     Swal.fire({
-      title: "Apakah kamu ingin menghapus produk ini?",
+      title: "Apakah kamu ingin menghapus product ini?",
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Iya",
       denyButtonText: `Jangan`,
     }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         try {
           await axios({
             method: "DELETE",
-            url: `${process.env.REACT_APP_API_URL}/product/delete-data-product/${slug}`,
+            url: `${process.env.REACT_APP_API_URL}/order/delete-order/${id}`,
             headers: {
               Accept: "application/json",
             },
@@ -57,9 +57,24 @@ export const AdminProducts = () => {
     });
   }, []);
 
+  const handleUpdateStatus = async (e: any, id: any) => {
+    let value = e.target.value;
+    const payload = {
+      status: value,
+      id: id,
+    };
+    try {
+      await axios({
+        method: "POST",
+        url: `${process.env.REACT_APP_API_URL}/order/update-status-order`,
+        data: payload,
+      });
+    } catch (error) {}
+  };
+
   useEffect(() => {
-    fetchAllProduct();
-  }, [fetchAllProduct, handleDelete]);
+    fetchAllOrders();
+  }, [fetchAllOrders]);
 
   if (isLoading) {
     return <Loading />;
@@ -69,19 +84,11 @@ export const AdminProducts = () => {
     <ContainerAdmin>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Toko Maelo - Produk</title>
+        <title>Toko Maelo - Order</title>
       </Helmet>
       <div className="mt-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold">Table Produk</h1>
-          <Link
-            to={"/admin-product/add"}
-            className="overflow-hidden rounded-md"
-          >
-            <div className="p-2 overflow-hidden text-white bg-secondary-200">
-              Tambah Product
-            </div>
-          </Link>
+          <h1 className="text-xl font-bold">Table Pesanan</h1>
         </div>
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
@@ -100,19 +107,37 @@ export const AdminProducts = () => {
                         scope="col"
                         className="px-6 py-4 text-sm font-medium text-left text-gray-900"
                       >
-                        Nama Produk
+                        Username
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-4 text-sm font-medium text-left text-gray-900"
                       >
-                        Harga Produk
+                        Status
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-4 text-sm font-medium text-left text-gray-900"
                       >
-                        Slug
+                        Alamat
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-4 text-sm font-medium text-left text-gray-900"
+                      >
+                        Nomor WhatsApp
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-4 text-sm font-medium text-left text-gray-900"
+                      >
+                        Jumlah Pesan
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-4 text-sm font-medium text-left text-gray-900"
+                      >
+                        Total
                       </th>
                       <th
                         scope="col"
@@ -124,36 +149,66 @@ export const AdminProducts = () => {
                   </thead>
 
                   <tbody>
-                    {products.map((product: any, idx: number) => {
+                    {orders.map((order: any, idx: number) => {
                       return (
                         <tr
-                          key={product.id}
+                          key={order.id}
                           className="transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100"
                         >
                           <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                             {idx + 1}
                           </td>
                           <td className="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
-                            {product.product_title}
+                            {order.user_name}
                           </td>
                           <td className="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
-                            {product.product_price}
+                            <select
+                              onChange={(e) => handleUpdateStatus(e, order.id)}
+                            >
+                              <option
+                                value="pending"
+                                selected={
+                                  order.order_status === "pending"
+                                    ? true
+                                    : false
+                                }
+                              >
+                                Pending
+                              </option>
+                              <option
+                                value="selesai"
+                                selected={
+                                  order.order_status === "selesai"
+                                    ? true
+                                    : false
+                                }
+                              >
+                                Selesai
+                              </option>
+                            </select>
                           </td>
                           <td className="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
-                            {product.product_slug}
+                            {order.user_address}
+                          </td>
+                          <td className="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                            {order.user_no_wa}
+                          </td>
+                          <td className="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                            {order.order_quantity}
+                          </td>
+                          <td className="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
+                            {order.order_total_price}
                           </td>
                           <td className="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                             <div className="flex justify-between space-x-4">
-                              <Link
+                              {/* <Link
                                 to={`/admin-product/update/${product.product_slug}`}
                                 className="text-blue-400"
                               >
                                 Edit
-                              </Link>
+                              </Link> */}
                               <button
-                                onClick={() =>
-                                  handleDelete(product.product_slug)
-                                }
+                                onClick={() => handleDelete(order.id)}
                                 className="text-red-500"
                               >
                                 Delete

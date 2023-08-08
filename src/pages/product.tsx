@@ -11,6 +11,7 @@ import { Loading } from "../components/ui/loading/loading";
 import { useCart } from "react-use-cart";
 import { CartContext } from "../store/cart/cartContext";
 import { formatRupiah } from "../helpers/formatRupiah";
+import { Helmet } from "react-helmet";
 
 const sizes = [
   { size: "XS", id: 1 },
@@ -92,6 +93,12 @@ export const Product = () => {
 
   return (
     <Container>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>
+          Toko Maelo - {`${product?.product_name ? product.product_name : ""}`}
+        </title>
+      </Helmet>
       <div className="flex flex-col p-2 ">
         {/* product preview */}
         <ProductPreview
