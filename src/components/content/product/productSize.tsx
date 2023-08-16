@@ -21,7 +21,7 @@ export const ProductSize = ({
       <button
         onClick={() => handleSelected(size.size)}
         key={idx}
-        className={`flex items-center justify-center  border-2 rounded-md flex-col space-y-1 p-2 ${
+        className={`flex h-10 w-10 items-center justify-center  border-2 rounded-md flex-col space-y-1 p-2 ${
           selectedSize === size.size
             ? "border-tertiary-100 shadow-xl scale-110"
             : "border-secondary-200 shadow-md text-secondary-200"

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { HiShoppingCart } from "react-icons/hi";
 import { useCart } from "react-use-cart";
 import { CartContext } from "../../../store/cart/cartContext";
+import LogoHome from "../../assets/Home.png";
 
 export const Navbar = () => {
   const { totalUniqueItems } = useCart();
@@ -15,13 +16,16 @@ export const Navbar = () => {
         pathname === "/checkout" && "hidden"
       } flex items-center justify-between h-12 px-2`}
     >
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <Link to="/" className="text-lg font-bold text-tertiary-100">
-          Home
+          <img src={LogoHome} className="w-8 h-8" />
         </Link>
-        <Link className="text-lg font-bold text-tertiary-100" to={"/questions"}>
-          Informasi
-        </Link>
+      </div>
+      <div
+        className="text-lg font-bold text-tertiary-100"
+        // to={"/questions"}
+      >
+        Maelo Shop
       </div>
       <button
         onClick={() => cartCtx.handleShowCart(true)}

@@ -277,7 +277,7 @@ export const Checkout = () => {
           <div className="space-y-2">
             <span className="text-lg font-bold">🏠 Alamat Pengantaran</span>
             <textarea
-              className="w-full h-20 p-1 rounded-sm shadow-md"
+              className="w-full h-20 p-1 rounded-lg shadow-md"
               placeholder="Masukan alamat pengantaran anda"
               onChange={(e) => setAddress(e.target.value)}
               value={address}
@@ -287,7 +287,7 @@ export const Checkout = () => {
           <div className="space-y-2">
             <span className="text-lg font-bold">📱 Nomor WhatsApp</span>
             <input
-              className="w-full h-10 p-1 rounded-sm shadow-md"
+              className="w-full h-10 p-1 rounded-lg shadow-md"
               placeholder="089587......."
               onChange={(e) => setWa(e.target.value)}
               value={wa}
@@ -298,7 +298,7 @@ export const Checkout = () => {
           <div className="space-y-2">
             <span className="text-lg font-bold">🙋 Nama Penerima</span>
             <input
-              className="w-full h-10 p-1 rounded-sm shadow-md"
+              className="w-full h-10 p-1 rounded-lg shadow-md"
               placeholder="Budi"
               onChange={(e) => setName(e.target.value)}
               value={name}
@@ -313,7 +313,7 @@ export const Checkout = () => {
                 return (
                   <button
                     key={item.id}
-                    className={`bg-white p-2 rounded-sm ${
+                    className={`bg-white p-2 rounded-lg ${
                       item.id === idDelivery ? "border-2 border-black" : ""
                     }`}
                     onClick={() => handleDelivery(item)}
@@ -331,7 +331,7 @@ export const Checkout = () => {
                 return (
                   <button
                     key={item.id}
-                    className={`bg-white p-2 rounded-sm ${
+                    className={`bg-white p-2 rounded-lg ${
                       item.id === idBilling ? "border-2 border-black" : ""
                     }`}
                     onClick={() => handleBilling(item)}

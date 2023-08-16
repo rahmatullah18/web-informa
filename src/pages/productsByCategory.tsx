@@ -43,7 +43,7 @@ export const ProductsByCategory = () => {
             <div>Jumlah</div>
             <div>({products?.length}) produk</div>
           </div>
-          <ProductsByCategoryFilter />
+          {/* <ProductsByCategoryFilter /> */}
         </div>
         <ProductByCategoryProducts products={products} />
       </div>

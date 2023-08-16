@@ -11,7 +11,13 @@ type TypeContainerProps = {
 export const Container = ({ children }: TypeContainerProps) => {
   return (
     <div className="h-full md:flex md:justify-center md:items-center md:h-full ">
-      <div className="md:bg-white md:shadow-xl md:w-96">
+      <div
+        className="md:bg-white md:shadow-xl md:w-96"
+        style={{
+          backgroundImage:
+            "linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%)",
+        }}
+      >
         <Cart />
         <Navbar />
         <div className="h-full">

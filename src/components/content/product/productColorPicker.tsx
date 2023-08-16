@@ -16,6 +16,7 @@ type TypeColorProps = {
 
 export const ProductColorPicker = ({ colors, filterColor }: TypeColorProps) => {
   const [selected, setSelected] = useState<number>();
+  console.log(colors);
 
   const handleSelectedColor = (id: number, color: string, stock: number) => {
     filterColor(color, stock);
@@ -26,7 +27,7 @@ export const ProductColorPicker = ({ colors, filterColor }: TypeColorProps) => {
     return (
       <button
         key={color.id}
-        className={`p-1  h-10 rounded-md  ${
+        className={`p-1   rounded-md flex flex-col ${
           selected === color.id
             ? "border-2 border-tertiary-100 shadow-xl scale-110"
             : "border shadow-md"
@@ -39,7 +40,11 @@ export const ProductColorPicker = ({ colors, filterColor }: TypeColorProps) => {
           )
         }
       >
-        {color.type_product_color}
+        <span>{color.type_product_color}</span>
+        <span className="text-xs text-gray-500">
+          {" "}
+          Stok: {color.type_product_stock}
+        </span>
       </button>
     );
   });

@@ -7,7 +7,7 @@ import logoMaelo from "../components/assets/logo_maelo.svg";
 export const dataDashboard = {
   jumbotron: {
     image: logoMaelo,
-    title: "Toko Maelo",
+    title: "Maelo Shop",
     bgColor: "bg-primary-100",
   },
   title: "The Best Product We Have",

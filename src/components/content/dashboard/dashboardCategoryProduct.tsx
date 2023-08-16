@@ -19,17 +19,14 @@ export const DashboardCategoryProduct = ({
           return (
             <div className="px-2" key={items[0].id}>
               <div className="flex items-center justify-between">
-                <Heading size="md" className="text-tertiary-100">
+                <div className="text-2xl font-semibold text-tertiary-100">
                   {items[0].category_title}
-                </Heading>
+                </div>
                 {/* /${classCategory}/${slug} */}
                 <Link to={`/category/${items[0].category_slug}`}>
-                  <Paragraph
-                    className="transition ease-in-out text-secondary-200 hover:scale-110"
-                    size="md"
-                  >
+                  <div className="transition ease-in-out text-md text-secondary-200 hover:scale-125">
                     Selengkapnya
-                  </Paragraph>
+                  </div>
                 </Link>
               </div>
               <div className="flex py-4 space-x-2 overflow-x-scroll overflow-y-hidden">
@@ -40,6 +37,7 @@ export const DashboardCategoryProduct = ({
                       urlImge={`${process.env.REACT_APP_IMAGE_URL}/${product.prduct_image}`}
                       product_color={""}
                       product_name={product.product_title}
+                      product_price={product.product_price}
                       slug={product.product_slug}
                     />
                   ) : (
