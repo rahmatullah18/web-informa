@@ -151,7 +151,7 @@ export const Checkout = () => {
       let totalPembayaran = `*Total pembayaran : ${formatRupiah(total)}*\n \n`;
       let norek = "1231123123";
       let bankName = "BRI";
-      let atasNama = "Rahmatullah";
+      let atasNama = "Maria";
       let metode =
         idBilling !== 1
           ? `*Metode pembayaran : Transfer rekening ${bankName} (${atasNama})* \nNomor rekening : *${norek}* \nSilahkan transfer sejumlah *${formatRupiah(
