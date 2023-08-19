@@ -241,6 +241,10 @@ export const Checkout = () => {
             ) : (
               <div className="space-y-2">
                 {items.map((item) => {
+                  let images: any = item?.product_url
+                    .split(", ")
+                    ?.map((image: any) => image.trim());
+
                   return (
                     <div
                       key={item.id}
@@ -250,7 +254,7 @@ export const Checkout = () => {
                         className={`relative w-20 space-y-5 rounded-lg overflow-hidden shadow-md h-24`}
                       >
                         <img
-                          src={`${process.env.REACT_APP_IMAGE_URL}/${item.product_url}`}
+                          src={`${process.env.REACT_APP_IMAGE_URL}/${images[0]}`}
                           alt="black"
                           className="w-full h-full object-fit"
                         />
