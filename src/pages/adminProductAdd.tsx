@@ -11,14 +11,14 @@ export const AdminProductAdd = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<string>("");
-  const [prductImage, setPrductImage] = useState<any>("");
+  const [prductImage, setPrductImage] = useState<any>([]);
 
   const [categoryId, setCategoryId] = useState<string>("");
   // type product
   const [typeProducts, setTypeProducts] = useState<any>([]);
 
   const [typeProductColor, setTypeProductColor] = useState<any>("");
-  const [typeProductSize, setTypeProductSize] = useState<any>("");
+  const [typeProductSize, setTypeProductSize] = useState<any>("L");
   const [typeProductStock, setTypeProductStock] = useState<any>("");
 
   const [categories, setCategories] = useState<any>([]);
@@ -40,11 +40,7 @@ export const AdminProductAdd = () => {
   }, [navigate]);
 
   const handleTypeProducts = () => {
-    if (
-      typeProductColor === "" ||
-      typeProductSize === "" ||
-      typeProductStock === ""
-    ) {
+    if (typeProductColor === "" || typeProductStock === "") {
       return Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -59,7 +55,6 @@ export const AdminProductAdd = () => {
     setTypeProducts([...typeProducts, variant]);
 
     setTypeProductColor("");
-    setTypeProductSize("");
     setTypeProductStock("");
   };
 
@@ -84,9 +79,13 @@ export const AdminProductAdd = () => {
         product_title: productName,
         product_slug: slugify(productName),
         product_price: parseInt(productPrice),
-        prduct_image: prductImage[0],
+        prduct_image: [],
         type_products: typeProducts,
       };
+
+      for (let i = 0; i < prductImage.length; i++) {
+        payload.prduct_image.push(prductImage[i]);
+      }
 
       try {
         await axios({
@@ -178,27 +177,37 @@ export const AdminProductAdd = () => {
               </span>
               <input
                 type="file"
+                multiple
                 accept="image/*"
                 onChange={(e: any) => setPrductImage(e.target.files)}
                 className="hidden"
               />
             </label>
-            {Array.from(prductImage).map((file: any, index) => {
-              return (
-                <div
-                  key={index}
-                  className="relative border-2 rounded-md shadow-lg"
-                >
+            <div className="flex items-center justify-between">
+              {Array.from(prductImage).map((file: any, index) => {
+                return (
                   <div
-                    className="absolute top-0 right-0 z-10 text-4xl font-bold text-red-500 cursor-pointer"
-                    onClick={() => setPrductImage("")}
+                    key={index}
+                    className="relative border-2 rounded-md shadow-lg"
                   >
-                    X
+                    <div
+                      className="absolute top-0 right-0 z-10 text-4xl font-bold text-red-500 cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setPrductImage(
+                          Array.from(prductImage).filter(
+                            (file, i) => i !== index
+                          )
+                        );
+                      }}
+                    >
+                      X
+                    </div>
+                    <img src={URL.createObjectURL(file)} alt="pre" />
                   </div>
-                  <img src={URL.createObjectURL(file)} alt="pre" />
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
           <div className="p-2 space-y-2 border border-black">
             <h2 className="text-lg font-semibold">Tipe Produk</h2>
@@ -209,13 +218,13 @@ export const AdminProductAdd = () => {
               placeholder="Warna: Merah"
               className="w-full px-2 py-1 text-lg font-semibold border-2 rounded-md shadow-md outline-none border-secondary-200 focus:ring ring-secondary-100"
             />
-            <input
+            {/* <input
               type="text"
               value={typeProductSize}
               onChange={(e) => setTypeProductSize(e.target.value)}
               placeholder="Ukuran: L"
               className="w-full px-2 py-1 text-lg font-semibold border-2 rounded-md shadow-md outline-none border-secondary-200 focus:ring ring-secondary-100"
-            />
+            /> */}
             <input
               type="number"
               value={typeProductStock}

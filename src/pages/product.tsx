@@ -12,6 +12,7 @@ import { useCart } from "react-use-cart";
 import { CartContext } from "../store/cart/cartContext";
 import { formatRupiah } from "../helpers/formatRupiah";
 import { Helmet } from "react-helmet";
+import { Slide } from "react-slideshow-image";
 
 const sizes = [
   { size: "XS", id: 1 },
@@ -23,6 +24,27 @@ const sizes = [
 
 export const Product = () => {
   const [product, setProduct] = useState<any>();
+
+  // slideshow
+  let images: any = product?.prduct_image
+    .split(", ")
+    ?.map((image: any) => image.trim());
+  let imageForSLideShow = images?.map((url: any) => ({ url, caption: "" }));
+
+  const spanStyle = {
+    padding: "20px",
+    background: "#efefef",
+    color: "#000000",
+  };
+
+  const divStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundSize: "cover",
+    height: "500px",
+  };
+  // endslideshow
 
   const [color, setColor] = useState<string | undefined>("");
   const [stock, setStock] = useState<number>(0);
@@ -101,10 +123,29 @@ export const Product = () => {
       </Helmet>
       <div className="flex flex-col p-2 ">
         {/* product preview */}
-        <ProductPreview
-          urlImage={`${process.env.REACT_APP_IMAGE_URL}/${product?.prduct_image}`}
-          color={product?.product_color}
-        />
+        {images?.length > 1 ? (
+          <Slide>
+            {imageForSLideShow?.map((slideImage: any, index: any) => (
+              <div key={index}>
+                <div
+                  style={{
+                    ...divStyle,
+                  }}
+                >
+                  <img
+                    src={`${process.env.REACT_APP_IMAGE_URL}/${slideImage.url}`}
+                    alt=""
+                  />
+                </div>
+              </div>
+            ))}
+          </Slide>
+        ) : (
+          <ProductPreview
+            urlImage={`${process.env.REACT_APP_IMAGE_URL}/${product?.prduct_image}`}
+          />
+        )}
+
         <div className="px-2 py-5 space-y-5 ">
           {/* heading */}
           <Heading size="md">{product?.product_name}</Heading>

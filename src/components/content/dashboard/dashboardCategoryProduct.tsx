@@ -31,10 +31,14 @@ export const DashboardCategoryProduct = ({
               </div>
               <div className="flex py-4 space-x-2 overflow-x-scroll overflow-y-hidden">
                 {items.map((product: any, idx: any) => {
+                  // string to array
+                  let images: any = product.prduct_image
+                    .split(", ")
+                    .map((image: any) => image.trim());
                   return idx <= 5 ? (
                     <Card
                       key={product.id}
-                      urlImge={`${process.env.REACT_APP_IMAGE_URL}/${product.prduct_image}`}
+                      urlImge={`${process.env.REACT_APP_IMAGE_URL}/${images[0]}`}
                       product_color={""}
                       product_name={product.product_title}
                       product_price={product.product_price}

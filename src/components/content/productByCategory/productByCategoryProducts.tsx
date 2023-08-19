@@ -11,6 +11,9 @@ export const ProductByCategoryProducts = ({
 }: ProductByCategoryProductsProps) => {
   const mapProducts = products ? (
     products?.map((product) => {
+      let images: any = product.prduct_image
+        .split(", ")
+        .map((image: any) => image.trim());
       return (
         <ProductByCategoryCard
           key={product.id}
@@ -18,7 +21,7 @@ export const ProductByCategoryProducts = ({
           category_class={product.category_class}
           category_slug={product.category_slug}
           id={product.id}
-          prduct_image={product.prduct_image}
+          prduct_image={images[0]}
           product_price={product.product_price}
           product_slug={product.product_slug}
           product_title={product.product_title}

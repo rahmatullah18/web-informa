@@ -16,7 +16,6 @@ type TypeColorProps = {
 
 export const ProductColorPicker = ({ colors, filterColor }: TypeColorProps) => {
   const [selected, setSelected] = useState<number>();
-  console.log(colors);
 
   const handleSelectedColor = (id: number, color: string, stock: number) => {
     filterColor(color, stock);
