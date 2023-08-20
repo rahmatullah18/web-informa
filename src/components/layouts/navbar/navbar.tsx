@@ -18,7 +18,7 @@ export const Navbar = () => {
     >
       <div className="flex items-center gap-4">
         <Link to="/" className="text-lg font-bold text-tertiary-100">
-          <img src={LogoHome} className="w-8 h-8" />
+          <img src={LogoHome} className="w-8 h-8" alt="logoHome" />
         </Link>
       </div>
       <div

@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Container } from "../components/layouts/container/container";
 import { Heading } from "../components/ui/heading/heading";
-import { ProductsByCategoryFilter } from "../components/content/productByCategory/productByCategoryFilter";
+// import { ProductsByCategoryFilter } from "../components/content/productByCategory/productByCategoryFilter";
 import { ProductByCategoryProducts } from "../components/content/productByCategory/productByCategoryProducts";
 import axios from "axios";
 import { TypeDataFetchCategory } from "../data/typeDataFetchCategory";

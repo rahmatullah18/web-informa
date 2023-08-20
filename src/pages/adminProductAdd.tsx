@@ -18,7 +18,7 @@ export const AdminProductAdd = () => {
   const [typeProducts, setTypeProducts] = useState<any>([]);
 
   const [typeProductColor, setTypeProductColor] = useState<any>("");
-  const [typeProductSize, setTypeProductSize] = useState<any>("L");
+  let typeProductSize = "L";
   const [typeProductStock, setTypeProductStock] = useState<any>("");
 
   const [categories, setCategories] = useState<any>([]);

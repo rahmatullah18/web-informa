@@ -31,11 +31,11 @@ export const Product = () => {
     ?.map((image: any) => image.trim());
   let imageForSLideShow = images?.map((url: any) => ({ url, caption: "" }));
 
-  const spanStyle = {
-    padding: "20px",
-    background: "#efefef",
-    color: "#000000",
-  };
+  // const spanStyle = {
+  //   padding: "20px",
+  //   background: "#efefef",
+  //   color: "#000000",
+  // };
 
   const divStyle = {
     display: "flex",

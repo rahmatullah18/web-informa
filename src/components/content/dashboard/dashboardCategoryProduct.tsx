@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { Card } from "../../ui/card/card";
-import { Heading } from "../../ui/heading/heading";
-import { Paragraph } from "../../ui/paragraph/paragraph";
 import { TypeDataFetchCategory } from "../../../data/typeDataFetchCategory";
 import { Loading } from "../../ui/loading/loading";
 
