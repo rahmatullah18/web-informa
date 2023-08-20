@@ -12,14 +12,15 @@ export const AdminProductUpdate = () => {
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<string>("");
   const [prductImage, setPrductImage] = useState<any>("");
-  const [urlImage, setUrlImage] = useState<any>("");
+
+  const [urlImage, setUrlImage] = useState<any>([]);
 
   const [categoryId, setCategoryId] = useState<string>("");
   // type product
   const [typeProducts, setTypeProducts] = useState<any>([]);
 
   const [typeProductColor, setTypeProductColor] = useState<any>("");
-  const [typeProductSize, setTypeProductSize] = useState<any>("");
+  const [typeProductSize, setTypeProductSize] = useState<any>("L");
   const [typeProductStock, setTypeProductStock] = useState<any>("");
 
   const [categories, setCategories] = useState<any>([]);
@@ -49,12 +50,14 @@ export const AdminProductUpdate = () => {
       });
       const product = await res.data;
       // setProducts(res.data);
+      let images: any = await product?.prduct_image
+        .split(", ")
+        ?.map((image: any) => image.trim());
       setProductName(product.product_title);
       setCategoryId(product.category_id);
       setProductPrice(product.product_price);
-      setUrlImage(product.prduct_image);
+      setUrlImage(images);
       setTypeProducts(product.type_products);
-      // console.log(product);
 
       setIsLoading(false);
     } catch (error) {
@@ -83,7 +86,6 @@ export const AdminProductUpdate = () => {
     setTypeProducts([...typeProducts, variant]);
 
     setTypeProductColor("");
-    setTypeProductSize("");
     setTypeProductStock("");
   };
 
@@ -108,11 +110,13 @@ export const AdminProductUpdate = () => {
         product_title: productName,
         product_slug: slugify(productName),
         product_price: parseInt(productPrice),
-        prduct_image: prductImage[0],
+        prduct_image: [],
         type_products: typeProducts,
       };
 
-      // return console.log(payload);
+      for (let i = 0; i < prductImage.length; i++) {
+        payload.prduct_image.push(prductImage[i]);
+      }
 
       try {
         await axios({
@@ -211,42 +215,65 @@ export const AdminProductUpdate = () => {
               </span>
               <input
                 type="file"
+                multiple
                 accept="image/*"
                 onChange={(e: any) => setPrductImage(e.target.files)}
                 className="hidden"
               />
             </label>
-            {typeof prductImage !== "string" ? (
-              Array.from(prductImage).map((file: any, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="relative border-2 rounded-md shadow-lg"
-                  >
-                    <div
-                      className="absolute top-0 right-0 z-10 text-4xl font-bold text-red-500 cursor-pointer"
-                      onClick={() => setPrductImage("")}
-                    >
-                      X
-                    </div>
-                    <img src={URL.createObjectURL(file)} alt="pre" />
-                  </div>
-                );
-              })
-            ) : (
-              <div className="relative border-2 rounded-md shadow-lg">
-                <div
-                  className="absolute top-0 right-0 z-10 text-4xl font-bold text-red-500 cursor-pointer"
-                  onClick={() => setPrductImage("")}
-                >
-                  X
-                </div>
-                <img
-                  src={`${process.env.REACT_APP_IMAGE_URL}/${urlImage}`}
-                  alt="pre"
-                />
-              </div>
-            )}
+            <div className="flex items-center justify-between space-x-2">
+              {typeof prductImage !== "string"
+                ? Array.from(prductImage).map((file: any, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="relative border-2 rounded-md shadow-lg"
+                      >
+                        <div
+                          className="absolute top-0 right-0 z-10 text-4xl font-bold text-red-500 cursor-pointer"
+                          // onClick={() => setPrductImage("")}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPrductImage(
+                              Array.from(prductImage).filter(
+                                (file, i) => i !== index
+                              )
+                            );
+                          }}
+                        >
+                          X
+                        </div>
+                        <img src={URL.createObjectURL(file)} alt="pre" />
+                      </div>
+                    );
+                  })
+                : urlImage?.map((image: any, idx: number) => {
+                    return (
+                      <div
+                        key={idx}
+                        className="relative border-2 rounded-md shadow-lg"
+                      >
+                        <div
+                          className="absolute top-0 right-0 z-10 text-4xl font-bold text-red-500 cursor-pointer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setUrlImage(
+                              Array.from(urlImage).filter(
+                                (file, i) => i !== idx
+                              )
+                            );
+                          }}
+                        >
+                          X
+                        </div>
+                        <img
+                          src={`${process.env.REACT_APP_IMAGE_URL}/${image}`}
+                          alt="pre"
+                        />
+                      </div>
+                    );
+                  })}
+            </div>
           </div>
           <div className="p-2 space-y-2 border border-black">
             <h2 className="text-lg font-semibold">Tipe Produk</h2>
@@ -257,13 +284,13 @@ export const AdminProductUpdate = () => {
               placeholder="Warna: Merah"
               className="w-full px-2 py-1 text-lg font-semibold border-2 rounded-md shadow-md outline-none border-secondary-200 focus:ring ring-secondary-100"
             />
-            <input
+            {/* <input
               type="text"
               value={typeProductSize}
               onChange={(e) => setTypeProductSize(e.target.value)}
               placeholder="Ukuran: L"
               className="w-full px-2 py-1 text-lg font-semibold border-2 rounded-md shadow-md outline-none border-secondary-200 focus:ring ring-secondary-100"
-            />
+            /> */}
             <input
               type="number"
               value={typeProductStock}
@@ -279,7 +306,7 @@ export const AdminProductUpdate = () => {
                 Tambah Tipe
               </span>
             </div>
-            <div className="flex items-center justify-start p-2 space-x-2 bg-gray-300 rounded-sm shadow-md">
+            <div className="flex items-center justify-start p-2 space-x-2 overflow-auto bg-gray-300 rounded-sm shadow-md">
               {typeProducts.map((item: any, idx: any) => {
                 return (
                   <div
