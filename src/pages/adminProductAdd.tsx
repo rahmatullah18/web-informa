@@ -245,8 +245,21 @@ export const AdminProductAdd = () => {
                 return (
                   <div
                     key={idx}
-                    className="p-2 text-black bg-white border rounded-sm shadow-lg"
+                    className="relative p-2 text-black bg-white border rounded-sm shadow-lg "
                   >
+                    <div
+                      className="absolute z-10 font-bold text-red-500 cursor-pointer -right-1 -top-3"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setTypeProducts(
+                          Array.from(typeProducts).filter(
+                            (file, i) => i !== idx
+                          )
+                        );
+                      }}
+                    >
+                      X
+                    </div>
                     {item.type_product_color}
                   </div>
                 );

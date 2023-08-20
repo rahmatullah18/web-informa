@@ -253,7 +253,7 @@ export const AdminProductUpdate = () => {
                         key={idx}
                         className="relative border-2 rounded-md shadow-lg"
                       >
-                        <div
+                        {/* <div
                           className="absolute top-0 right-0 z-10 text-4xl font-bold text-red-500 cursor-pointer"
                           onClick={(e) => {
                             e.preventDefault();
@@ -265,7 +265,7 @@ export const AdminProductUpdate = () => {
                           }}
                         >
                           X
-                        </div>
+                        </div> */}
                         <img
                           src={`${process.env.REACT_APP_IMAGE_URL}/${image}`}
                           alt="pre"
@@ -311,8 +311,21 @@ export const AdminProductUpdate = () => {
                 return (
                   <div
                     key={idx}
-                    className="p-2 text-black bg-white border rounded-sm shadow-lg"
+                    className="relative p-2 text-black bg-white border rounded-sm shadow-lg"
                   >
+                    <div
+                      className="absolute z-10 font-bold text-red-500 cursor-pointer -right-1 -top-3"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setTypeProducts(
+                          Array.from(typeProducts).filter(
+                            (file, i) => i !== idx
+                          )
+                        );
+                      }}
+                    >
+                      X
+                    </div>
                     {item.type_product_color}
                   </div>
                 );
