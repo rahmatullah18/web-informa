@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ProductAmount } from "../components/content/product/productAmount";
 import { ProductColorPicker } from "../components/content/product/productColorPicker";
 import { ProductPreview } from "../components/content/product/productPreview";
@@ -122,6 +122,7 @@ export const Product = () => {
         </title>
       </Helmet>
       <div className="flex flex-col p-2 ">
+        <Link to={"/"}>⬅️ Kembali</Link>
         {/* product preview */}
         {images?.length > 1 ? (
           <Slide>

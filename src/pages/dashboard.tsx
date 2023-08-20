@@ -7,6 +7,7 @@ import { DashboardCategoryProduct } from "../components/content/dashboard/dashbo
 import { TypeDataFetchCategory } from "../data/typeDataFetchCategory";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2";
 
 type TypeDataJumbotron = {
   image?: string;
@@ -29,18 +30,22 @@ export const Dashboard = () => {
   }, []);
 
   const handleSearch = async () => {
-    setActiveSearch(true);
-    setIsLoading(true);
-    setProducts([]);
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/product/search-product/${search}`
-      );
-      setProducts(response.data);
-    } catch (error) {
-      console.error(error);
+    if (search) {
+      setActiveSearch(true);
+      setIsLoading(true);
+      setProducts([]);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/product/search-product/${search}`
+        );
+        setProducts(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+      setIsLoading(false);
+    } else {
+      Swal.fire("Pencarian kosong", "", "error");
     }
-    setIsLoading(false);
   };
 
   const getProductsFilterByCategory = useCallback(async () => {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { ContainerAdmin } from "../components/layouts/container/containerAdmin";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Loading } from "../components/ui/loading/loading";
 import Swal from "sweetalert2";
 import slugify from "../helpers/formatSlug";
@@ -162,6 +162,9 @@ export const AdminProductUpdate = () => {
         <title>Toko Maelo - Update Produk</title>
       </Helmet>
       <div className="mb-96">
+        <div className="mb-4">
+          <Link to={"/"}>⬅️ Kembali</Link>
+        </div>
         <h1 className="my-4 text-xl font-bold"> Edit Produk</h1>
         <form className="space-y-4" onSubmit={handleSubmitForm}>
           <div>

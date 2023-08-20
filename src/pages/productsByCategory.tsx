@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Container } from "../components/layouts/container/container";
 import { Heading } from "../components/ui/heading/heading";
 // import { ProductsByCategoryFilter } from "../components/content/productByCategory/productByCategoryFilter";
@@ -37,6 +37,9 @@ export const ProductsByCategory = () => {
         <title>Toko Maelo - {`${categoryTitle ? categoryTitle : ""}`}</title>
       </Helmet>
       <div className="p-2 mt-5 space-y-5">
+        <div className="mb-4">
+          <Link to={"/"}>⬅️ Kembali</Link>
+        </div>
         <Heading size="lg">{categoryTitle}</Heading>
         <div className="flex items-center justify-between">
           <div className="flex flex-col items-center justify-center">

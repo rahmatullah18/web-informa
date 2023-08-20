@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { ContainerAdmin } from "../components/layouts/container/containerAdmin";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Loading } from "../components/ui/loading/loading";
 import Swal from "sweetalert2";
@@ -128,6 +128,9 @@ export const AdminProductAdd = () => {
         <title>Toko Maelo - Tambah Produk</title>
       </Helmet>
       <div className="mb-96">
+        <div className="mb-4">
+          <Link to={"/admin-products"}>⬅️ Kembali</Link>
+        </div>
         <form className="space-y-4" onSubmit={handleSubmitForm}>
           <div>
             <input
