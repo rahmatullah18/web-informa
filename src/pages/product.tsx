@@ -148,7 +148,7 @@ export const Product = () => {
 
         <div className="px-2 py-5 space-y-5 ">
           {/* heading */}
-          <Heading size="md">{product?.product_name}</Heading>
+          <Heading size="xl">{product?.product_name}</Heading>
           {/* harga */}
           <div className="text-2xl font-bold text-tertiary-100">
             {formatRupiah(product?.product_price)}
