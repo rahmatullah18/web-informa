@@ -16,7 +16,7 @@ export const DashboardCategoryProduct = ({
         data?.map((items: any) => {
           return (
             <div className="px-2" key={items[0].id}>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between py-1 text-black border-b border-gray-400 rounded-sm">
                 <div className="text-2xl font-semibold text-tertiary-100">
                   {items[0].category_title}
                 </div>
