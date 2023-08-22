@@ -140,9 +140,9 @@ export const Checkout = () => {
       let products = items.map((item: any, idx: any) => {
         return `*${idx + 1}. ${item.product_name}* \nJumlah : ${
           item.quantity
-        } \nHarga : ${formatRupiah(item.price)}\nTotal harga : ${formatRupiah(
-          item.itemTotal
-        )}\n`;
+        } \nHarga : ${formatRupiah(item.price)}\nUkuran : ${
+          item.size
+        }\nTotal harga : ${formatRupiah(item.itemTotal)}\n`;
       });
       let totalHargaPesanan = `\nTotal harga pesanan : ${formatRupiah(
         cartTotal

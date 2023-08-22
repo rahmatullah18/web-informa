@@ -12,6 +12,7 @@ export const AdminProductUpdate = () => {
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<string>("");
   const [prductImage, setPrductImage] = useState<any>("");
+  const [productDesc, setProductDesc] = useState<string>("");
 
   const [urlImage, setUrlImage] = useState<any>([]);
 
@@ -57,6 +58,7 @@ export const AdminProductUpdate = () => {
       setProductName(product.product_title);
       setCategoryId(product.category_id);
       setProductPrice(product.product_price);
+      setProductDesc(product.product_desc);
       setUrlImage(images);
       setTypeProducts(product.type_products);
 
@@ -96,6 +98,7 @@ export const AdminProductUpdate = () => {
     if (
       productName === "" ||
       productPrice === "" ||
+      productDesc === "" ||
       categoryId === "" ||
       typeProducts.length < 1
     ) {
@@ -111,6 +114,7 @@ export const AdminProductUpdate = () => {
         product_title: productName,
         product_slug: slugify(productName),
         product_price: parseInt(productPrice),
+        product_desc: productDesc,
         prduct_image: [],
         type_products: typeProducts,
       };
@@ -163,7 +167,7 @@ export const AdminProductUpdate = () => {
       </Helmet>
       <div className="mb-96">
         <div className="mb-4">
-          <Link to={"/"}>⬅️ Kembali</Link>
+          <Link to={"/admin-products"}>⬅️ Kembali</Link>
         </div>
         <h1 className="my-4 text-xl font-bold"> Edit Produk</h1>
         <form className="space-y-4" onSubmit={handleSubmitForm}>
@@ -278,6 +282,14 @@ export const AdminProductUpdate = () => {
                     );
                   })}
             </div>
+          </div>
+          <div>
+            <textarea
+              value={productDesc}
+              onChange={(e) => setProductDesc(e.target.value)}
+              placeholder="Deskripsi Produk"
+              className="w-full px-2 py-1 text-lg font-semibold border-2 rounded-md shadow-md outline-none h-60 border-secondary-200 focus:ring ring-secondary-100"
+            ></textarea>
           </div>
           <div className="p-2 space-y-2 border border-black">
             <h2 className="text-lg font-semibold">Tipe Produk</h2>

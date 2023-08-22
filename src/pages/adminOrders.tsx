@@ -57,11 +57,12 @@ export const AdminOrders = () => {
     });
   }, []);
 
-  const handleUpdateStatus = async (e: any, id: any) => {
+  const handleUpdateStatus = async (e: any, id: any, userId: any) => {
     let value = e.target.value;
     const payload = {
       status: value,
       id: id,
+      user_id: userId,
     };
     try {
       await axios({
@@ -163,7 +164,9 @@ export const AdminOrders = () => {
                           </td>
                           <td className="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                             <select
-                              onChange={(e) => handleUpdateStatus(e, order.id)}
+                              onChange={(e) =>
+                                handleUpdateStatus(e, order.id, order.user_id)
+                              }
                             >
                               <option
                                 value="pending"
@@ -174,6 +177,16 @@ export const AdminOrders = () => {
                                 }
                               >
                                 Pending
+                              </option>
+                              <option
+                                value="diantar"
+                                selected={
+                                  order.order_status === "diantar"
+                                    ? true
+                                    : false
+                                }
+                              >
+                                Diantar
                               </option>
                               <option
                                 value="selesai"

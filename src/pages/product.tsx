@@ -13,6 +13,7 @@ import { CartContext } from "../store/cart/cartContext";
 import { formatRupiah } from "../helpers/formatRupiah";
 import { Helmet } from "react-helmet";
 import { Slide } from "react-slideshow-image";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 const sizes = [
   { size: "XS", id: 1 },
@@ -154,6 +155,12 @@ export const Product = () => {
           <div className="text-2xl font-bold text-tertiary-100">
             {formatRupiah(product?.product_price)}
           </div>
+          <div className="">
+            <h2 className="">Deskripsi Produk</h2>
+            <div className="text-sm text-gray-600">
+              <ReactMarkdown>{product?.product_desc}</ReactMarkdown>
+            </div>
+          </div>
           {/* color */}
           <ProductColorPicker
             colors={product?.type_products}
@@ -161,7 +168,6 @@ export const Product = () => {
           />
           {/* size */}
           <ProductSize
-            // filterSize={filterSize}
             sizes={sizes}
             selectedSize={selectedSize}
             handleSelectedSize={handleSelectedSize}

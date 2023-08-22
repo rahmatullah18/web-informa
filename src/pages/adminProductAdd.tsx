@@ -20,6 +20,7 @@ export const AdminProductAdd = () => {
   const [typeProductColor, setTypeProductColor] = useState<any>("");
   let typeProductSize = "L";
   const [typeProductStock, setTypeProductStock] = useState<any>("");
+  const [productDesc, setProductDesc] = useState<string>("");
 
   const [categories, setCategories] = useState<any>([]);
 
@@ -63,6 +64,7 @@ export const AdminProductAdd = () => {
     setIsLoading(true);
     if (
       productName === "" ||
+      productDesc === "" ||
       productPrice === "" ||
       prductImage.length < 1 ||
       categoryId === "" ||
@@ -77,12 +79,14 @@ export const AdminProductAdd = () => {
       const payload: any = {
         category_id: parseInt(categoryId),
         product_title: productName,
+        product_desc: productDesc,
         product_slug: slugify(productName),
         product_price: parseInt(productPrice),
         prduct_image: [],
         type_products: typeProducts,
       };
 
+      // return console.log(payload);
       for (let i = 0; i < prductImage.length; i++) {
         payload.prduct_image.push(prductImage[i]);
       }
@@ -211,6 +215,14 @@ export const AdminProductAdd = () => {
                 );
               })}
             </div>
+          </div>
+          <div>
+            <textarea
+              value={productDesc}
+              onChange={(e) => setProductDesc(e.target.value)}
+              placeholder="Deskripsi Produk"
+              className="w-full px-2 py-1 text-lg font-semibold border-2 rounded-md shadow-md outline-none h-60 border-secondary-200 focus:ring ring-secondary-100"
+            ></textarea>
           </div>
           <div className="p-2 space-y-2 border border-black">
             <h2 className="text-lg font-semibold">Tipe Produk</h2>
