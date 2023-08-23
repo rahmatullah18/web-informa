@@ -51,7 +51,8 @@ export const Product = () => {
   const [stock, setStock] = useState<number>(0);
 
   // const [sizes, setSizes] = useState<TypeSizes[] | undefined>([]);
-  const [selectedSize, setSelectedSize] = useState<string | undefined>("");
+  const [selectedSize, setSelectedSize] = useState<string | undefined>("-");
+
   const [amount, setAmount] = useState<number>(1);
 
   const [loading, setLoading] = useState(false);
@@ -85,6 +86,10 @@ export const Product = () => {
         url: `${process.env.REACT_APP_API_URL}/product/get-product-by-slug/${slug}`,
       });
       setProduct(res?.data);
+
+      if (product?.category_id === 5) {
+        setSelectedSize("-");
+      }
     } catch (error) {
       navigate("/server-error");
     }
@@ -155,23 +160,22 @@ export const Product = () => {
           <div className="text-2xl font-bold text-tertiary-100">
             {formatRupiah(product?.product_price)}
           </div>
-          <div className="">
-            <h2 className="">Deskripsi Produk</h2>
-            <div className="text-sm text-gray-600">
-              <ReactMarkdown>{product?.product_desc}</ReactMarkdown>
-            </div>
-          </div>
+
+          <ReactMarkdown>{product?.product_desc}</ReactMarkdown>
+
           {/* color */}
           <ProductColorPicker
             colors={product?.type_products}
             filterColor={filterColor}
           />
           {/* size */}
-          <ProductSize
-            sizes={sizes}
-            selectedSize={selectedSize}
-            handleSelectedSize={handleSelectedSize}
-          />
+          {product?.category_id !== 5 && (
+            <ProductSize
+              sizes={sizes}
+              selectedSize={selectedSize}
+              handleSelectedSize={handleSelectedSize}
+            />
+          )}
           {/* amount */}
           <ProductAmount stock={stock} amount={amount} setAmount={setAmount} />
           {/* buttonSubmit */}
@@ -179,7 +183,7 @@ export const Product = () => {
             <button
               onClick={() => handleAddItem()}
               className="px-4 py-2 text-base font-light capitalize transition ease-in-out rounded-md shadow hover:scale-110 bg-secondary-200 text-secondary-100"
-              disabled={color !== "" && selectedSize !== "" ? false : true}
+              disabled={color !== "" ? false : true}
             >
               Tambah ke Keranjang
             </button>

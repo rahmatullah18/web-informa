@@ -176,7 +176,7 @@ export const AdminOrders = () => {
                                     : false
                                 }
                               >
-                                Pending
+                                Dikemas
                               </option>
                               <option
                                 value="diantar"
