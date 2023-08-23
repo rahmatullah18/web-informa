@@ -6,6 +6,8 @@ import { Loading } from "../components/ui/loading/loading";
 import Swal from "sweetalert2";
 import slugify from "../helpers/formatSlug";
 import { Helmet } from "react-helmet";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export const AdminProductUpdate = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -283,13 +285,21 @@ export const AdminProductUpdate = () => {
                   })}
             </div>
           </div>
-          <div>
+          {/* <div>
             <textarea
               value={productDesc}
               onChange={(e) => setProductDesc(e.target.value)}
               placeholder="Deskripsi Produk"
               className="w-full px-2 py-1 text-lg font-semibold border-2 rounded-md shadow-md outline-none h-60 border-secondary-200 focus:ring ring-secondary-100"
             ></textarea>
+          </div> */}
+          <div className="bg-white ">
+            <ReactQuill
+              value={productDesc}
+              onChange={setProductDesc}
+              theme="snow"
+              className="h-full"
+            />
           </div>
           <div className="p-2 space-y-2 border border-black">
             <h2 className="text-lg font-semibold">Tipe Produk</h2>

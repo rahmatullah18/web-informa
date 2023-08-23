@@ -73,13 +73,13 @@ export const AdminProducts = () => {
       </Helmet>
       <div className="mt-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold">Table Produk</h1>
+          <h1 className="text-xl font-bold">Tabel Produk</h1>
           <Link
             to={"/admin-product/add"}
             className="overflow-hidden rounded-md"
           >
             <div className="p-2 overflow-hidden text-white bg-secondary-200">
-              Tambah Product
+              Tambah Produk
             </div>
           </Link>
         </div>

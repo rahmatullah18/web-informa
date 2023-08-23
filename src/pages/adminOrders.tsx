@@ -89,7 +89,7 @@ export const AdminOrders = () => {
       </Helmet>
       <div className="mt-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold">Table Pesanan</h1>
+          <h1 className="text-xl font-bold">Tabel Pesanan</h1>
         </div>
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">

@@ -13,7 +13,7 @@ import { CartContext } from "../store/cart/cartContext";
 import { formatRupiah } from "../helpers/formatRupiah";
 import { Helmet } from "react-helmet";
 import { Slide } from "react-slideshow-image";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import ReactHtmlParser from "@orrisroot/react-html-parser";
 
 const sizes = [
   { size: "XS", id: 1 },
@@ -94,7 +94,7 @@ export const Product = () => {
       navigate("/server-error");
     }
     setLoading(false);
-  }, [slug, navigate]);
+  }, [slug, navigate, product?.category_id]);
 
   const handleAddItem = () => {
     const item: any = {
@@ -155,13 +155,21 @@ export const Product = () => {
 
         <div className="px-2 py-5 space-y-5 ">
           {/* heading */}
-          <Heading size="xl">{product?.product_name}</Heading>
+          <div className="text-3xl font-bold capitalize text-secondary-200">
+            {product?.product_name}
+          </div>
           {/* harga */}
           <div className="text-2xl font-bold text-tertiary-100">
             {formatRupiah(product?.product_price)}
           </div>
 
-          <ReactMarkdown>{product?.product_desc}</ReactMarkdown>
+          {/* <article className="prose lg:prose-xl">
+            {{product?.product_desc}}
+          </article> */}
+          {/* <article className="prose">{product?.product_desc}</article> */}
+          {/* <ReactMarkdown>{product?.product_desc}</ReactMarkdown> */}
+
+          <div>{ReactHtmlParser(product?.product_desc)}</div>
 
           {/* color */}
           <ProductColorPicker
