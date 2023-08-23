@@ -5,7 +5,6 @@ import { ProductColorPicker } from "../components/content/product/productColorPi
 import { ProductPreview } from "../components/content/product/productPreview";
 import { ProductSize } from "../components/content/product/productSize";
 import { Container } from "../components/layouts/container/container";
-import { Heading } from "../components/ui/heading/heading";
 import axios from "axios";
 import { Loading } from "../components/ui/loading/loading";
 import { useCart } from "react-use-cart";
@@ -177,7 +176,7 @@ export const Product = () => {
             filterColor={filterColor}
           />
           {/* size */}
-          {product?.category_id !== 5 && (
+          {product?.category_id >= 5 && (
             <ProductSize
               sizes={sizes}
               selectedSize={selectedSize}
