@@ -176,7 +176,7 @@ export const Product = () => {
             filterColor={filterColor}
           />
           {/* size */}
-          {product?.category_id >= 5 && (
+          {product?.category_id < 5 && (
             <ProductSize
               sizes={sizes}
               selectedSize={selectedSize}
