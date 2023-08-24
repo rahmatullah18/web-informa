@@ -52,7 +52,7 @@ export const Cart = () => {
                   className="flex justify-center space-x-2 rounded-md hover:bg-gray-200"
                 >
                   <div
-                    className={`relative w-20 space-y-5 rounded-lg overflow-hidden shadow-md h-32`}
+                    className={`relative w-28 space-y-5 rounded-lg overflow-hidden shadow-md h-32`}
                   >
                     <img
                       src={`${process.env.REACT_APP_IMAGE_URL}/${images[0]}`}

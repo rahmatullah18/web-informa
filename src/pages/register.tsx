@@ -47,7 +47,7 @@ export const Register = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="w-full m-2 space-y-4">
+      <div className="w-full m-2 space-y-4 md:w-1/3">
         {/* title */}
         <h1 className="text-2xl font-bold text-center text-secondary-200">
           Register Maelo Shop
