@@ -33,7 +33,6 @@ export const AdminProducts = () => {
       confirmButtonText: "Iya",
       denyButtonText: `Jangan`,
     }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         try {
           await axios({
