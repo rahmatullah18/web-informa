@@ -16,6 +16,9 @@ import { AdminProductAdd } from "./pages/adminProductAdd";
 import { AdminProductUpdate } from "./pages/adminProductUpdate";
 import { AdminOrders } from "./pages/adminOrders";
 import { AdminReport } from "./pages/adminReport";
+import { Register } from "./pages/register";
+import { LoginUser } from "./pages/loginUser";
+import { Pesanan } from "./pages/pesanan";
 export default function App() {
   return (
     <CartProvider>
@@ -31,6 +34,9 @@ export default function App() {
         <Route path="/server-error" element={<PageServerError />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login-user" element={<LoginUser />} />
+        <Route path="/pesanan" element={<Pesanan />} />
 
         {/* admin */}
         {/* admin */}

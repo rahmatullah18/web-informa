@@ -108,6 +108,9 @@ export const Product = () => {
     };
     addItem(item, amount);
     cartCtx.handleShowCart(true);
+    if (!localStorage.getItem("loginUser")) {
+      navigate("/login-user");
+    }
   };
 
   useEffect(() => {

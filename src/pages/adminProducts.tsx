@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ContainerAdmin } from "../components/layouts/container/containerAdmin";
 import { Loading } from "../components/ui/loading/loading";
 import axios from "axios";

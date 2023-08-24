@@ -171,12 +171,13 @@ export const Checkout = () => {
         order_total_price: total,
         order_quantity: totalItems,
         paragraph: paragraph,
+        id: localStorage.getItem("user_id"),
         wa: convertNumber(wa),
       };
 
       try {
         setIsLoading(true);
-        await axios({
+        const res = await axios({
           method: "POST",
           url: `${process.env.REACT_APP_API_URL}/order/create-order`,
           data: payload,
@@ -184,6 +185,9 @@ export const Checkout = () => {
             Accept: "application/json",
           },
         });
+
+        localStorage.setItem("order_id", res?.data?.order?.id);
+
         setIsLoading(false);
         Swal.fire({
           icon: "success",
@@ -202,7 +206,8 @@ export const Checkout = () => {
           //     Accept: "application/json",
           //   },
           // });
-          emptyCart();
+          // emptyCart();
+          navigate("/pesanan");
         });
       } catch (error) {
         Swal.fire({
@@ -219,6 +224,12 @@ export const Checkout = () => {
       navigate("/");
     }
   }, [navigate, items]);
+
+  useEffect(() => {
+    if (!localStorage.getItem("loginUser")) {
+      navigate("/login-user");
+    }
+  }, []);
 
   if (isLoading) {
     return <Loading />;
