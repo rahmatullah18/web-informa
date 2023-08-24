@@ -52,7 +52,7 @@ export const LoginUser = () => {
     if (localStorage.getItem("loginUser")) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   if (isLoading) {
     return <Loading />;

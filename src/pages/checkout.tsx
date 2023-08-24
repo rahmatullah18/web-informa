@@ -43,7 +43,7 @@ const billings = [
 ];
 
 export const Checkout = () => {
-  const { items, cartTotal, totalItems, emptyCart } = useCart();
+  const { items, cartTotal, totalItems } = useCart();
 
   const navigate = useNavigate();
   const [address, setAddress] = useState<string>("");
@@ -229,7 +229,7 @@ export const Checkout = () => {
     if (!localStorage.getItem("loginUser")) {
       navigate("/login-user");
     }
-  }, []);
+  }, [navigate]);
 
   if (isLoading) {
     return <Loading />;

@@ -44,13 +44,13 @@ export const Pesanan = () => {
     if (!localStorage.getItem("loginUser")) {
       navigate("/login-user");
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     if (!localStorage.getItem("order_id")) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   if (isLoading) {
     return <Loading />;

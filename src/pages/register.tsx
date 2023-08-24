@@ -40,7 +40,7 @@ export const Register = () => {
     if (localStorage.getItem("loginUser")) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
   if (isLoading) {
     return <Loading />;
   }
