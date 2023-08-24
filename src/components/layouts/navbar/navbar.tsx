@@ -97,7 +97,7 @@ export const Navbar = () => {
             </Transition>
           </Menu>
         ) : (
-          <Link className="font-bold" to={"/login"}>
+          <Link className="font-bold" to={"/login-user"}>
             Login
           </Link>
         )}
